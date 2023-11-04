@@ -1,3 +1,24 @@
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+# lienna_bag
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+=======
+>>>>>>> Stashed changes
 <!-- inspire README PROJECTS -->
 
 <!-- https://github.com/ma-shamshiri/Spam-Detector/blob/master/README.md -->
@@ -84,3 +105,7 @@ Silahkan baca [contributing guidlines](CONTRIBUTING.md) untuk panduan pembuatan 
   
 [Back To Top](top)
 </div>
+<<<<<<< Updated upstream
+=======
+>>>>>>> b88ae118f5c86f8788d54be10967bbc82a5c24d4
+>>>>>>> Stashed changes
