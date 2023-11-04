@@ -1,7 +1,5 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-# lienna_bag
+
+<!-- # lienna_bag
 
 A new Flutter project.
 
@@ -16,9 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
->>>>>>> Stashed changes
+samples, guidance on mobile development, and a full API reference. -->
+
+
 <!-- inspire README PROJECTS -->
 
 <!-- https://github.com/ma-shamshiri/Spam-Detector/blob/master/README.md -->
@@ -105,7 +103,3 @@ Silahkan baca [contributing guidlines](CONTRIBUTING.md) untuk panduan pembuatan 
   
 [Back To Top](top)
 </div>
-<<<<<<< Updated upstream
-=======
->>>>>>> b88ae118f5c86f8788d54be10967bbc82a5c24d4
->>>>>>> Stashed changes
