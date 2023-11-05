@@ -64,8 +64,8 @@ samples, guidance on mobile development, and a full API reference. -->
 |-----|:--------------------:|:--------: |
 | 2109106015 | Andi Nur Fadilah |`FE&BE Bag Details Page`<br>`FE&BE About Us Page`<br>`FE&BE User Profile Page`|
 | 2109106050 | Natalie Fuad |`FE&BE Login Page`<br>`FE&BE Regist Page`|
-| 2109106044 | Riski Agung Romadhon |`FE&BE Introduction Page`<br>`FE&BE Home Page`|
-| 2109106050 | Sherina Laraswati |`FE&BE Search Page`<br>`FE&BE Merk Page`|
+| 2109106044 | Riski Agung Romadhon |`FE&BE Search Page`<br>`FE&BE Merk Page`|
+| 2109106050 | Sherina Laraswati |`FE&BE Introduction Page`<br>`FE&BE Home Page`|
 
 <br>
 
