@@ -26,7 +26,7 @@ samples, guidance on mobile development, and a full API reference. -->
 <a name="top"></a>
 
 <div align="center">
-
+[alt text](https://github.com/losshin/Lieanna-Bag/blob/main/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png?raw=true)
 
 # Lienna Bag
 ### Kelompok 5 A1<br>Aplikasi Rekomendasi Tas
