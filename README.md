@@ -26,7 +26,7 @@ samples, guidance on mobile development, and a full API reference. -->
 <a name="top"></a>
 
 <div align="center">
-![ic_launcher](https://github.com/losshin/Lieanna-Bag/assets/92092729/efa57ae5-c822-499d-87fc-963e92a1d913)
+![alt text](https://github.com/losshin/Lieanna-Bag/assets/92092729/efa57ae5-c822-499d-87fc-963e92a1d913 ?raw=true)
 
 
 # Lienna Bag
