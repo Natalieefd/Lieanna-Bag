@@ -4,8 +4,7 @@ Pastikan selalu *flutter clean* setiap *push-to-github* dan gunakan tipe **commi
   
 - **docs**: perubahan Dokumentasi  
 - **feat**: penambahan Fitur
-- **fix**: Perbaikan bug  
-- **perf**: Perubahan kode yang meningkatkan kinerja atau efisiensi  
+- **fix**: Perbaikan bug 
 - **refactor**: Perubahan kode yang tidak 'memperbaiki bug atau menambahkan fitur  
 - **style**: Perubahan yang tidak memengaruhi makna kode (white-space, pemformatan, tidak ada titik koma, etc)  
   
