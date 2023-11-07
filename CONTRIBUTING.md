@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Pastikan setiap perubahan yang dilakukan selalu cantumkan salah satu dari Format commit message berikut:  
+Pastikan selalu *flutter clean* setiap *push-to-github* dan gunakan Format **commit message** berikut:  
   
 - **docs**: perubahan Dokumentasi  
 - **feat**: penambahan Fitur
