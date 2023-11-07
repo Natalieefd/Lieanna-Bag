@@ -26,7 +26,7 @@ samples, guidance on mobile development, and a full API reference. -->
 <a name="top"></a>
 
 <div align="center">
-[ logo aplikasi ]
+![image.png]( {} )
 
 
 # Lienna Bag
