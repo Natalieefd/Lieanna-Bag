@@ -51,12 +51,11 @@ samples, guidance on mobile development, and a full API reference. -->
  - [Features](#features)
  - [Contributors](#contributors)
 
-<br>
 
 ## Introduction
 <!-- tentang aplikasi -->
+LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas, baik pemula maupun yang berpengalaman, dalam membeli tas dengan cara yang lebih cerdas dan memuaskan. Aplikasi ini berisi berbagai merek, jenis, model, harga dan berbagai informasi tas lainnya yang tersedia di LIEANNA BAG.
 
-<br>
 
 ## Job Desk
 
@@ -67,7 +66,6 @@ samples, guidance on mobile development, and a full API reference. -->
 | 2109106044 | Riski Agung Romadhon |`FE&BE Search Page`<br>`FE&BE Merk Page`|
 | 2109106050 | Sherina Laraswati |`FE&BE Introduction Page`<br>`FE&BE Home Page`|
 
-<br>
 
 ## Alur Program
 ```mermaid
@@ -86,12 +84,15 @@ graph
   F--->H;
 ```
 
-<br>
 
 ## Features
+Fitur-fitur yang tersedia di aplikasi LINEANNA BAG :
+<!--
++ Melihat detail informasi tas
++ Mencari produk tas
++ Melihat kelompok tas berdasarkan suatu merk
+-->
 
-
-<br>
 
 ## Contributors
 Silahkan baca [contributing guidlines](CONTRIBUTING.md) untuk panduan pembuatan projek dan informasi lainnya.
