@@ -59,6 +59,7 @@ LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas,
 
 
 ## Job Desk
+<div align=center>
 
 | NIM | NAMA | JOB DESK |
 |-----|:--------------------:|:--------: |
@@ -67,6 +68,7 @@ LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas,
 | 2109106044 | Riski Agung Romadhon |`FE&BE Search Page`<br>`FE&BE Merk Page`|
 | 2109106050 | Sherina Laraswati |`FE&BE Introduction Page`<br>`FE&BE Home Page`|
 
+</div>
 
 ## Alur Program
 ```mermaid
