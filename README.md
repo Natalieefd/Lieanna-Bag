@@ -17,10 +17,11 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference. -->
 
 
-<!-- inspire README PROJECTS -->
+<!-- inspiring README PROJECTS -->
 
 <!-- https://github.com/ma-shamshiri/Spam-Detector/blob/master/README.md -->
 <!-- https://github.com/aregtech/areg-sdk/blob/master/README.md -->
+<!-- https://github.com/gitpoint/git-point#readme -->
 
 
 <a name="top"></a>
