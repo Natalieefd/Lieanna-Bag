@@ -59,6 +59,7 @@ LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas,
 
 
 ## Job Desk
+<br>
 <div align=center>
 
 | NIM | NAMA | JOB DESK |
