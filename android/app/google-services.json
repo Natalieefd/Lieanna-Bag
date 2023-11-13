@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "383666064650",
+    "project_id": "lieanna-bag",
+    "storage_bucket": "lieanna-bag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383666064650:android:61cd2ccc4d737354c8bef3",
+        "android_client_info": {
+          "package_name": "com.example.lienna_bag"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqcxBMnwkbOkQzaBksOXSRHHvBx9EmQDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
