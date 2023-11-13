@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.only(top: 140, bottom: 30, left: 85, right: 85),
             child: CupertinoButton.filled(
               borderRadius: BorderRadius.all(Radius.circular(40)),
-              child: Text("Sign Up"),
+              child: Text("Login"),
               onPressed: () {
                 Navigator.pushNamed(
                   context,
