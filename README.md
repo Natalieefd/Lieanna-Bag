@@ -1,5 +1,5 @@
 
-<!-- # lienna_bag
+<!-- # lieanna_bag
 
 A new Flutter project.
 
@@ -30,7 +30,7 @@ samples, guidance on mobile development, and a full API reference. -->
 
 ![logo](https://github.com/losshin/Lieanna-Bag/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-# Lienna Bag
+# Lieanna Bag
 ### Kelompok 5 A1<br>Aplikasi Rekomendasi Tas
 <p>Projek Akhir - Praktikum Mobile</p>
 
@@ -59,6 +59,7 @@ LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas,
 
 
 ## Job Desk
+Berikut ringkasan pembagian tugas yang dipegang oleh masing-masing anggota. Untuk penjelasan tugas yang lebih rinci dapat dilihat pada [contributing guidlines](CONTRIBUTING.md) berikut.
 <br>
 <div align=center>
 
