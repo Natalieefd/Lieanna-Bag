@@ -17,10 +17,11 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference. -->
 
 
-<!-- inspire README PROJECTS -->
+<!-- inspiring README PROJECTS -->
 
 <!-- https://github.com/ma-shamshiri/Spam-Detector/blob/master/README.md -->
 <!-- https://github.com/aregtech/areg-sdk/blob/master/README.md -->
+<!-- https://github.com/gitpoint/git-point#readme -->
 
 
 <a name="top"></a>
@@ -51,14 +52,15 @@ samples, guidance on mobile development, and a full API reference. -->
  - [Features](#features)
  - [Contributors](#contributors)
 
-<br>
 
 ## Introduction
 <!-- tentang aplikasi -->
+LIEANNA BAG merupakan aplikasi mobile yang dirancang untuk membantu pecinta tas, baik pemula maupun yang berpengalaman, dalam membeli tas dengan cara yang lebih cerdas dan memuaskan. Aplikasi ini berisi berbagai merek, jenis, model, harga dan berbagai informasi tas lainnya yang tersedia di LIEANNA BAG.
 
-<br>
 
 ## Job Desk
+<br>
+<div align=center>
 
 | NIM | NAMA | JOB DESK |
 |-----|:--------------------:|:--------: |
@@ -67,7 +69,7 @@ samples, guidance on mobile development, and a full API reference. -->
 | 2109106044 | Riski Agung Romadhon |`FE&BE Search Page`<br>`FE&BE Merk Page`|
 | 2109106050 | Sherina Laraswati |`FE&BE Introduction Page`<br>`FE&BE Home Page`|
 
-<br>
+</div>
 
 ## Alur Program
 ```mermaid
@@ -86,12 +88,15 @@ graph
   F--->H;
 ```
 
-<br>
 
 ## Features
+Fitur-fitur yang tersedia di aplikasi LINEANNA BAG :
+<!--
++ Melihat detail informasi tas
++ Mencari produk tas
++ Melihat kelompok tas berdasarkan suatu merk
+-->
 
-
-<br>
 
 ## Contributors
 Silahkan baca [contributing guidlines](CONTRIBUTING.md) untuk panduan pembuatan projek dan informasi lainnya.
