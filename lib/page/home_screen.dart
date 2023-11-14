@@ -27,7 +27,9 @@ class _hom_scrnState extends State<hom_scrn> {
                   //   fit: BoxFit.cover)
                 ),
               ),
-              Text("Welcome, User A!")
+              Text("Welcome, User A!",
+                style: Theme.of(context).textTheme.titleMedium
+                ),
             ]
           )
         ],
