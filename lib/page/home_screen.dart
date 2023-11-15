@@ -12,40 +12,52 @@ class _hom_scrnState extends State<hom_scrn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 20),
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black
+                      // image: DecorationImage(
+                      //   image: AssetImage("Assets/bracelets.jpg"),
+                      //   fit: BoxFit.cover)
+                      ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 10),
+                child: Text("Welcome, User A!",
+                    style: Theme.of(context).textTheme.titleSmall),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 170),
+                child: Icon(
+                  CupertinoIcons.square_arrow_right,
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
           Padding(
-            
-            padding: const EdgeInsets.only(top: 30,left:20),
+            padding: const EdgeInsets.only(top: 90),
             child: Container(
-              width: 30,
-              height: 30,
+              width: 70,
+              height: 70,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.black
-                // image: DecorationImage(
-                //   image: AssetImage("Assets/bracelets.jpg"),
-                //   fit: BoxFit.cover)
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30,left:10),
-            child: Text("Welcome, User A!",
-              style: Theme.of(context).textTheme.titleSmall
-              ),
-          ),
-          
-          Padding(
-            
-            padding: const EdgeInsets.only(top: 40,left:170),
-            child: Icon(
-              CupertinoIcons.arrowtriangle_right_square,
-              size: 30,
+                  borderRadius: BorderRadius.circular(5), color: Colors.black
+                  // image: DecorationImage(
+                  //   image: AssetImage("Assets/bracelets.jpg"),
+                  //   fit: BoxFit.cover)
+                  ),
             ),
           ),
         ],
-
       ),
     );
   }
