@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
 
           titleLarge: TextStyle(
             fontSize: 20,
-            color: Colors.black
+            color: Colors.black,
+            fontWeight: FontWeight.bold
           ),
 
           titleMedium: TextStyle(
