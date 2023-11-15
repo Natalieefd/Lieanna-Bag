@@ -23,7 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Color.fromARGB(255, 250, 246, 240),
         textTheme: TextTheme(
+          
           bodyLarge: TextStyle(
             fontSize: 24,
             color: Colors.black,
