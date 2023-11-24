@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.22.0
   introduction_screen: ^3.1.12
+  intl: ^0.18.1
   flutter:
     sdk: flutter
 
@@ -67,7 +68,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: La Belle Aurore
+      fonts:
+        - asset: fonts/LaBelleAurore-Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
