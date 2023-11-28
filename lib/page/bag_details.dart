@@ -153,28 +153,35 @@ class _Bag_DetailsState extends State<Bag_Details> {
                     Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 10.0,
-                      children: colorMap.keys.map((String color) {
-                        return ElevatedButton(
-                          onPressed: () {
+                      children: [
+                        ToggleButtons(
+                          children: colorMap.keys.map((String color) {
+                            return Text(
+                              color,
+                              style: TextStyle(
+                                color: color == selectedColor
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            );
+                          }).toList(),
+                          isSelected: colorMap.keys
+                              .map((String color) => color == selectedColor)
+                              .toList(),
+                          onPressed: (int index) {
                             setState(() {
-                              selectedColor = color;
+                              selectedColor = colorMap.keys.toList()[index];
                             });
                           },
-                          style: ElevatedButton.styleFrom(
-                            primary: color == selectedColor
-                                ? Color.fromRGBO(76, 83, 114, 1)
-                                : Colors.white,
-                          ),
-                          child: Text(
-                            color,
-                            style: TextStyle(
-                              color: color == selectedColor
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                          color: Colors.white,
+                          selectedColor: Colors.white,
+                          fillColor: Color.fromRGBO(76, 83, 114, 1),
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderWidth: 1,
+                          borderColor: Colors.white,
+                          selectedBorderColor: Colors.white,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 10),
                     Text(
