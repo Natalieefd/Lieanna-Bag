@@ -31,10 +31,11 @@ dependencies:
   cloud_firestore: ^4.13.0
   cupertino_icons: ^1.0.2
   firebase_core: ^2.22.0
-  introduction_screen: ^3.1.12
-  intl: ^0.18.1
   flutter:
     sdk: flutter
+  intl: ^0.18.1
+  introduction_screen: ^3.1.12
+  toggle_switch: ^2.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -52,26 +53,26 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-  - Assets/tas1.jpg
-  - Assets/tas2.jpg
-  - Assets/tas3.jpg
-  - Assets/tas4.jpg
-  - Assets/logo.png
-  - Assets/grey_kierra.jpg
-  - Assets/navy_kierra.jpg
-  - Assets/khaki_kierra.jpg
-  - Assets/maroon_kierra.jpg
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+    #   - images/a_dot_burr.jpeg
+    #   - images/a_dot_ham.jpeg
+    - Assets/tas1.jpg
+    - Assets/tas2.jpg
+    - Assets/tas3.jpg
+    - Assets/tas4.jpg
+    - Assets/logo.png
+    - Assets/grey_kierra.jpg
+    - Assets/navy_kierra.jpg
+    - Assets/khaki_kierra.jpg
+    - Assets/maroon_kierra.jpg
+    # An image asset can refer to one or more resolution-specific "variants", see
+    # https://flutter.dev/assets-and-images/#resolution-aware
+    # For details regarding adding assets from package dependencies, see
+    # https://flutter.dev/assets-and-images/#from-packages
+    # To add custom fonts to your application, add a fonts section here,
+    # in this "flutter" section. Each entry in this list should have a
+    # "family" key with the font family name, and a "fonts" key with a
+    # list giving the asset and other descriptors for the font. For
+    # example:
   fonts:
     - family: La Belle Aurore
       fonts:
