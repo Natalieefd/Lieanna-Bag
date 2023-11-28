@@ -150,38 +150,14 @@ class _Bag_DetailsState extends State<Bag_Details> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: 10.0,
-                      children: [
-                        ToggleButtons(
-                          children: colorMap.keys.map((String color) {
-                            return Text(
-                              color,
-                              style: TextStyle(
-                                color: color == selectedColor
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            );
-                          }).toList(),
-                          isSelected: colorMap.keys
-                              .map((String color) => color == selectedColor)
-                              .toList(),
-                          onPressed: (int index) {
-                            setState(() {
-                              selectedColor = colorMap.keys.toList()[index];
-                            });
-                          },
-                          color: Colors.white,
-                          selectedColor: Colors.white,
-                          fillColor: Color.fromRGBO(76, 83, 114, 1),
-                          borderRadius: BorderRadius.circular(8.0),
-                          borderWidth: 1,
-                          borderColor: Colors.white,
-                          selectedBorderColor: Colors.white,
-                        ),
-                      ],
+                    ButtonSegment(
+                      colorMap: colorMap,
+                      selectedColor: selectedColor,
+                      onColorSelected: (color) {
+                        setState(() {
+                          selectedColor = color;
+                        });
+                      },
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -226,6 +202,66 @@ class _Bag_DetailsState extends State<Bag_Details> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ButtonSegment extends StatelessWidget {
+  final Map<String, String> colorMap;
+  final String selectedColor;
+  final Function(String) onColorSelected;
+
+  ButtonSegment({
+    required this.colorMap,
+    required this.selectedColor,
+    required this.onColorSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.start,
+      spacing: 10.0,
+      children: colorMap.keys.map((String color) {
+        bool isSelected = color == selectedColor;
+
+        return GestureDetector(
+          onTap: () {
+            onColorSelected(color);
+          },
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: isSelected ? Color.fromRGBO(76, 83, 114, 1) : Colors.white,
+              borderRadius: BorderRadius.circular(8.0),
+              border: Border.all(
+                color: isSelected ? Colors.white : Colors.black,
+                width: 2.0,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                isSelected
+                    ? Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 16.0,
+                      )
+                    : Container(),
+                SizedBox(width: isSelected ? 4.0 : 0),
+                Text(
+                  color,
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
