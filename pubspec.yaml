@@ -59,6 +59,10 @@ flutter:
   - Assets/tas3.jpg
   - Assets/tas4.jpg
   - Assets/logo.png
+  - Assets/grey_kierra.jpg
+  - Assets/navy_kierra.jpg
+  - Assets/khaki_kierra.jpg
+  - Assets/maroon_kierra.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
