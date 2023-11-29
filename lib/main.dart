@@ -18,14 +18,33 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+      ColorScheme lightTheme = ColorScheme.fromSeed(
+      background: Color.fromARGB(255, 206, 190, 190), //warna backgorund
+      onPrimary: Color.fromARGB(255, 0, 0, 0), // text
+      secondary: Color.fromARGB(255, 206, 190, 190),
+      onSecondary: Color.fromARGB(255, 33, 32, 32), // text
+      tertiary: Color.fromARGB(255, 206, 190, 190),
+      seedColor: Color.fromARGB(255, 206, 190, 190),
+      brightness: Brightness.light,
+      );
+
+    ColorScheme darkTheme = ColorScheme.fromSeed(
+      background: Color.fromARGB(255, 0, 0, 0),
+      primary: const Color.fromARGB(255, 255, 255, 255),
+      onPrimary: const Color.fromARGB(255, 255, 255, 255),
+      secondary: Color.fromARGB(255, 206, 190, 190),
+      onSecondary: Color.fromARGB(255, 228, 220, 220),
+      seedColor: Color.fromARGB(255, 206, 190, 190),
+      brightness: Brightness.dark,
+      );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Lieanna Bag',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Color.fromARGB(255, 250, 246, 240),
+        scaffoldBackgroundColor: Color.fromARGB(255, 206, 190, 190),
         textTheme: TextTheme(
           
           bodyLarge: TextStyle(
@@ -41,7 +60,7 @@ class MyApp extends StatelessWidget {
           ),
 
           titleMedium: TextStyle(
-            fontSize: 17,
+            fontSize: 16,
               color: Colors.black
           ),
 
@@ -54,34 +73,34 @@ class MyApp extends StatelessWidget {
       darkTheme:ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Color.fromARGB(255, 149, 145, 145),
+        scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
         textTheme: TextTheme(
           
           bodyLarge: TextStyle(
             fontSize: 23,
-            color: Colors.black,
+            color: const Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold
           ),
 
           titleLarge: TextStyle(
             fontSize: 20,
-            color: Colors.black,
+            color: const Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold
           ),
 
           titleMedium: TextStyle(
-            fontSize: 17,
-              color: Colors.black
+            fontSize: 16,
+              color: const Color.fromARGB(255, 255, 255, 255),
           ),
 
           titleSmall: TextStyle(
             fontSize: 15,
-              color: Colors.black
+              color: const Color.fromARGB(255, 255, 255, 255),
           )
         )
       ),
-      // themeMode: ThemeMode.system,
-      home: introduction(),
+      themeMode: ThemeMode.light,
+      home: hom_scrn(),
     );
   }
 }

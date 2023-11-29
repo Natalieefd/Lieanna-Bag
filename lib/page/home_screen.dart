@@ -12,6 +12,7 @@ class hom_scrn extends StatefulWidget {
 class _hom_scrnState extends State<hom_scrn> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
@@ -82,13 +83,14 @@ class _hom_scrnState extends State<hom_scrn> {
                   Padding(
                     padding: const EdgeInsets.only(top: 40, left: 20),
                     child: Container(
+                      
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black
                           // image: DecorationImage(
-                          //   image: AssetImage("Assets/bracelets.jpg"),
+                          //   image: AssetImage("Assets/poster.jpg"),
                           //   fit: BoxFit.cover)
                           ),
                     ),
@@ -99,7 +101,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         style: Theme.of(context).textTheme.titleSmall),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 170),
+                    padding: EdgeInsets.only(top: 40, left: MediaQuery.of(context).size.width * 0.35),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -109,6 +111,7 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                       child: Icon(
                         CupertinoIcons.square_arrow_right,
+                        color: Color.fromARGB(255, 0, 0, 0),
                         size: 30,
                       ),
                     ),
@@ -118,76 +121,76 @@ class _hom_scrnState extends State<hom_scrn> {
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Container(
-                  width: 400,
-                  height: 200,
-                  decoration: BoxDecoration(color: Colors.black
-                      // image: DecorationImage(
-                      //   image: AssetImage("Assets/bracelets.jpg"),
-                      //   fit: BoxFit.cover)
+                    width: MediaQuery.of(context).size.width,
+                   height: 200,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("Assets/poster.jpg"),
+                        fit: BoxFit.cover)
                       ),
+                ),
+              ),
+
+              Container(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40, left: 15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas1.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40, left: 30),
+                      child: Container(
+                         width: MediaQuery.of(context).size.width * 0.25,
+                      height: MediaQuery.of(context).size.height * 0.13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas3.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40, left: 30),
+                      child: Container(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                      height: MediaQuery.of(context).size.height * 0.13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas2.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 20),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas1.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 25),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas3.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 25),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas2.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40, top: 5),
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.09, top: 5),
                     child: Text(
                       "Merek A",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 70, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17, top: 5),
                     child: Text(
                       "Merek B",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 70, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17, top: 5),
                     child: Text(
                       "Merek C",
                       style: Theme.of(context).textTheme.titleSmall,
@@ -196,7 +199,7 @@ class _hom_scrnState extends State<hom_scrn> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 35, left: 20),
+                padding:  EdgeInsets.only(top: 35, left: MediaQuery.of(context).size.width * 0.06),
                 child: Text(
                   "TOP PRODUCT",
                   style: Theme.of(context).textTheme.titleLarge,
@@ -205,26 +208,24 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 25, left: 25),
+                    padding: const EdgeInsets.only(top: 25, left: 15),
                     child: Container(
-                      width: 160,
+                       width: MediaQuery.of(context).size.width * 0.4,
                       height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
                           image: DecorationImage(
                               image: AssetImage("Assets/tas1.jpg"),
                               fit: BoxFit.cover)),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 25, left: 25),
+                    padding: const EdgeInsets.only(top: 25, left: 45),
                     child: Container(
-                      width: 160,
+                       width: MediaQuery.of(context).size.width * 0.4,
                       height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
                           image: DecorationImage(
                               image: AssetImage("Assets/tas2.jpg"),
                               fit: BoxFit.cover)),
@@ -235,14 +236,14 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 35, top: 5),
+                    padding:  EdgeInsets.only( left: MediaQuery.of(context).size.width * 0.05, top: 5),
                     child: Text(
                       "Shoulder Bag 5632",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.18, top: 5),
                     child: Text(
                       "Sling Bag 1708",
                       style: Theme.of(context).textTheme.titleMedium,
@@ -253,26 +254,24 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 25),
+                    padding: const EdgeInsets.only(top: 30, left: 15),
                     child: Container(
-                      width: 160,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
                           image: DecorationImage(
                               image: AssetImage("Assets/tas3.jpg"),
                               fit: BoxFit.cover)),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 25),
+                    padding: const EdgeInsets.only(top: 30, left: 45),
                     child: Container(
-                      width: 160,
+                       width: MediaQuery.of(context).size.width * 0.4,
                       height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          // color: Colors.black,
                           image: DecorationImage(
                               image: AssetImage("Assets/tas4.jpg"),
                               fit: BoxFit.cover)),
@@ -283,14 +282,14 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 5),
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, top: 5),
                     child: Text(
                       "Sling Bag 0638",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 65, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22, top: 5),
                     child: Text(
                       "BackPack 0266",
                       style: Theme.of(context).textTheme.titleMedium,
