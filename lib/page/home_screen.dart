@@ -60,9 +60,9 @@ class _hom_scrnState extends State<hom_scrn> {
             ),
           ),
           BottomNavigationBarItem(
-            label: "Us",
+            label: "Search",
             icon: Icon(
-              CupertinoIcons.info_circle,
+              CupertinoIcons.search,
             ),
           ),
           BottomNavigationBarItem(
@@ -144,14 +144,14 @@ class _hom_scrnState extends State<hom_scrn> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 15),
                         child:Hero(
-                          tag: "Merek1",
+                          tag: "Zalora",
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.25,
                             height: MediaQuery.of(context).size.height * 0.13,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                    image: AssetImage("Assets/tas1.jpg"),
+                                    image: AssetImage("Assets/zalora.png"),
                                     fit: BoxFit.cover)),
                           ),
                         ),
@@ -167,14 +167,14 @@ class _hom_scrnState extends State<hom_scrn> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 30),
                         child: Hero(
-                          tag: "Merek2",
+                          tag: "Kanken",
                           child: Container(
                              width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.13,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                    image: AssetImage("Assets/tas3.jpg"),
+                                    image: AssetImage("Assets/kanken.png"),
                                     fit: BoxFit.cover)),
                           ),
                         ),
@@ -190,15 +190,15 @@ class _hom_scrnState extends State<hom_scrn> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 30),
                         child: Hero(
-                          tag: "Merek3",
+                          tag: "h&m",
                           child: Container(
                                   width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.13,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 image: DecorationImage(
-                                    image: AssetImage("Assets/tas2.jpg"),
-                                    fit: BoxFit.cover)),
+                                    image: AssetImage("Assets/h&m.png"),
+                                    fit: BoxFit.fill)),
                           ),
                         ),
                       ),
@@ -209,24 +209,24 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.09, top: 5),
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, top: 5),
                     child: Text(
-                      "Merek A",
+                      "Zalora",
                       style: Theme.of(context).textTheme.titleSmall,
                       
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.22, top: 5),
                     child: Text(
-                      "Merek B",
+                      "KanKen",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17, top: 5),
+                    padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2, top: 5),
                     child: Text(
-                      "Merek C",
+                      "H&M",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
