@@ -1,8 +1,10 @@
- import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_build_context_synchronously
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/auth.dart';
+import 'package:lienna_bag/page/forgot_password.dart';
+import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/register_page.dart';
-
-// testing
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,129 +15,286 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool press = false;
+  bool form = false;
+  bool loading = false;
+  bool emailVal = false;
+  bool passwordVal = false;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {
+      setState(() {
+        emailVal = _emailController.text.isNotEmpty;
+      });
+    });
+    _passwordController.addListener(() {
+      setState(() {
+        passwordVal = _passwordController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  Future<dynamic> alert(BuildContext context, String judul, String kontent) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(judul),
+          content: Text(kontent),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Ok"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 95),
-            child: Text(
-              "Login".toUpperCase(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 100, left: 25, right: 25),
+            padding: const EdgeInsets.only(top: 85, left: 25, bottom: 55),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text("Username"),
+                Text(
+                  "welcome back!".toUpperCase(),
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                SizedBox(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      contentPadding: EdgeInsets.only(left: 10),
-                      hintText: "Type Here",
-                    ),
+                const Text(
+                  "Login to Lieanna Bag",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
+          Visibility(
+            visible: true,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text("Password"),
+                Container(
+                  width: 250,
+                  height: 250,
+                  decoration: const BoxDecoration(
+                      //gambar sementara
+                      // image: DecorationImage(
+                      //     image: AssetImage("Assets/login.png")),
+                      ),
                 ),
-                SizedBox(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            press = !press;
-                          });
-                        },
-                        child: Icon(press
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined),
-                      ),
-                      contentPadding: EdgeInsets.only(left: 10),
-                      hintText: "Type Here",
+                Padding(
+                  padding: const EdgeInsets.only(top: 70, left: 35, right: 35),
+                  child: SizedBox(
+                    width: size.width - 50,
+                    child: CupertinoButton.filled(
+                      child: const Text("login"),
+                      onPressed: () {
+                        setState(() {
+                          form = !form;
+                        });
+                      },
                     ),
-                    obscureText: press ? false : true,
                   ),
                 ),
+                SizedBox(
+                  width: size.width - 55,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage(),
+                          ));
+                    },
+                    child: const Text("Create an Account"),
+                  ),
+                )
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 35),
-            child: Row(
-              children: [
-                Text("Don't Have an Account?"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterPage(),
-                        ));
-                  },
-                  child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            color: Colors.indigo,
-                            decoration: TextDecoration.underline),
-                      )),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 140, bottom: 30, left: 85, right: 85),
-            child: CupertinoButton.filled(
-              borderRadius: BorderRadius.all(Radius.circular(40)),
-              child: Text("Login"),
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/',
-                );
-              },
             ),
           ),
         ],
+      ),
+      bottomSheet: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        curve: Curves.ease,
+        width: size.width,
+        height: form == false ? 0 : size.height - 370,
+        decoration: BoxDecoration(
+            //warna sementara
+            color: Theme.of(context).colorScheme.background,
+            boxShadow: const [BoxShadow(color: Colors.black38, blurRadius: 5)],
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+        child: Visibility(
+          visible: form,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    form = !form;
+                  });
+                },
+                child: Container(
+                  width: size.width - 270,
+                  height: 7,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: const BorderRadius.all(Radius.circular(10))),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 90, left: 25, right: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                          contentPadding: const EdgeInsets.only(left: 10),
+                          hintText: "Email",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                press = !press;
+                              });
+                            },
+                            child: Icon(press
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined),
+                          ),
+                          contentPadding: const EdgeInsets.only(left: 10),
+                          hintText: "Password",
+                        ),
+                        obscureText: press ? false : true,
+                        style: const TextStyle(
+                            // color: ,
+                            // fontWeight: Theme.of(context).ti
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: SizedBox(
+                  width: size.width - 55,
+                  child: CupertinoButton.filled(
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                    child: const Text("Submit"),
+                    onPressed: () async {
+                      
+                      if (emailVal == true && passwordVal == true) {
+                        try {
+                          final email = _emailController.value.text;
+                          final password = _passwordController.value.text;
+                          
+                          setState(() => loading = true);
+                          //login akun
+                          await Auth().signIn(email, password);
+                          setState(() => loading = false);
+                          
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const hom_scrn(),
+                            ),
+                          );
+
+                        } catch (e) {
+                          print(e);
+                        }
+
+                      } else {
+                        alert(context, "Waring",
+                            "Mohon lengkapi data login terlebih dahulu!");
+                      }
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResetPasswordScreen(),
+                        ));
+                  },
+                  child: Text("Forgot Password"),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
