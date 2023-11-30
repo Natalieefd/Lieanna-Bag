@@ -60,9 +60,9 @@ class _hom_scrnState extends State<hom_scrn> {
             ),
           ),
           BottomNavigationBarItem(
-            label: "Us",
+            label: "Search",
             icon: Icon(
-              CupertinoIcons.info_circle,
+              CupertinoIcons.search,
             ),
           ),
           BottomNavigationBarItem(
