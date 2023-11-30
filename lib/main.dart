@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
       onBackground: Color.fromARGB(255, 0, 0, 0), // text
       primary: Color.fromARGB(255, 226, 212, 225),
       onPrimary: Color.fromARGB(255, 0, 0, 0), // text
-      secondary: Color.fromARGB(255, 206, 190, 190),
-      onSecondary: Color.fromARGB(255, 33, 32, 32),
+      secondary: Color.fromARGB(255, 74, 83, 114),
+      onSecondary: Color.fromARGB(255, 104, 95, 95),
       error: Colors.red,
       onError: Colors.red,
       surface: Colors.red,
@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
       primary: const Color.fromARGB(255, 122, 125, 156),
       onPrimary: const Color.fromARGB(255, 255, 255, 255),
       secondary: Color.fromARGB(255, 74, 83, 114),
-      onSecondary: Color.fromARGB(255, 228, 220, 220),
-      error: Colors.red,
+      onSecondary: Color.fromARGB(255, 104, 95, 95),
+       error: Colors.red,
       onError: Colors.red,
       surface: Colors.red,
       onSurface: Colors.red,
@@ -69,8 +69,12 @@ class MyApp extends StatelessWidget {
                       fontSize: 20,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
-                  titleMedium: TextStyle(fontSize: 16, color: Colors.black),
-                  titleSmall: TextStyle(fontSize: 15, color: Colors.black))),
+                  titleMedium: TextStyle(
+                    fontSize: 16,
+                   color: Colors.black),
+                  titleSmall: TextStyle(
+                    fontSize: 15, 
+                    color: Colors.black))),
           darkTheme: ThemeData(
               useMaterial3: true,
               brightness: Brightness.light,

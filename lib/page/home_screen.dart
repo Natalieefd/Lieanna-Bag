@@ -49,9 +49,9 @@ class _hom_scrnState extends State<hom_scrn> {
               );
             }
         },
-        backgroundColor: const Color.fromARGB(255, 185, 180, 199),
-        selectedItemColor: Colors.black87,
-        unselectedItemColor: Color.fromARGB(255, 86, 84, 84),
+        backgroundColor:Theme.of(context).colorScheme.secondary,
+        selectedItemColor: Theme.of(context).colorScheme.onSecondary,
+        unselectedItemColor: Theme.of(context).colorScheme.onBackground,
         items: [
           BottomNavigationBarItem(
             label: "Home",
@@ -84,7 +84,6 @@ class _hom_scrnState extends State<hom_scrn> {
                   Padding(
                     padding: const EdgeInsets.only(top: 40, left: 20),
                     child: Container(
-                      
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
@@ -112,7 +111,7 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                       child: Icon(
                         CupertinoIcons.square_arrow_right,
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Theme.of(context).colorScheme.onBackground,
                         size: 30,
                       ),
                     ),
@@ -135,8 +134,7 @@ class _hom_scrnState extends State<hom_scrn> {
               Container(
                 child: Row(
                   children: [
-                    
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         
                         Navigator.of(context).push(
@@ -144,7 +142,6 @@ class _hom_scrnState extends State<hom_scrn> {
                         );
                       },
                       child: Padding(
-                        
                         padding: const EdgeInsets.only(top: 40, left: 15),
                         child:Hero(
                           tag: "Merek1",
@@ -161,27 +158,29 @@ class _hom_scrnState extends State<hom_scrn> {
                       ),
                     ),
 
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
-                        
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=>LoginPage(),)
                         );
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 30),
-                        child: Container(
-                           width: MediaQuery.of(context).size.width * 0.25,
-                        height: MediaQuery.of(context).size.height * 0.13,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              image: DecorationImage(
-                                  image: AssetImage("Assets/tas3.jpg"),
-                                  fit: BoxFit.cover)),
+                        child: Hero(
+                          tag: "Merek2",
+                          child: Container(
+                             width: MediaQuery.of(context).size.width * 0.25,
+                          height: MediaQuery.of(context).size.height * 0.13,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                    image: AssetImage("Assets/tas3.jpg"),
+                                    fit: BoxFit.cover)),
+                          ),
                         ),
                       ),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         
                         Navigator.of(context).push(
@@ -190,14 +189,17 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 30),
-                        child: Container(
-                                width: MediaQuery.of(context).size.width * 0.25,
-                        height: MediaQuery.of(context).size.height * 0.13,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              image: DecorationImage(
-                                  image: AssetImage("Assets/tas2.jpg"),
-                                  fit: BoxFit.cover)),
+                        child: Hero(
+                          tag: "Merek3",
+                          child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.25,
+                          height: MediaQuery.of(context).size.height * 0.13,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                    image: AssetImage("Assets/tas2.jpg"),
+                                    fit: BoxFit.cover)),
+                          ),
                         ),
                       ),
                     ),
@@ -211,6 +213,7 @@ class _hom_scrnState extends State<hom_scrn> {
                     child: Text(
                       "Merek A",
                       style: Theme.of(context).textTheme.titleSmall,
+                      
                     ),
                   ),
                   Padding(
@@ -238,7 +241,7 @@ class _hom_scrnState extends State<hom_scrn> {
               ),
               Row(
                 children: [
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=>LoginPage(),)
@@ -246,18 +249,21 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 25, left: 15),
-                      child: Container(
-                         width: MediaQuery.of(context).size.width * 0.4,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas1.jpg"),
-                                fit: BoxFit.cover)),
+                      child: Hero(
+                          tag: "top1",
+                        child: Container(
+                           width: MediaQuery.of(context).size.width * 0.4,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas1.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                         
                         Navigator.of(context).push(
@@ -266,14 +272,17 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 25, left: 45),
-                      child: Container(
-                         width: MediaQuery.of(context).size.width * 0.4,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas2.jpg"),
-                                fit: BoxFit.cover)),
+                      child: Hero(
+                          tag: "top2",
+                        child: Container(
+                           width: MediaQuery.of(context).size.width * 0.4,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas2.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
                   ),
@@ -300,7 +309,7 @@ class _hom_scrnState extends State<hom_scrn> {
               Row(
                 children: [
 
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                         
                         Navigator.of(context).push(
@@ -309,34 +318,39 @@ class _hom_scrnState extends State<hom_scrn> {
                       },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30, left: 15),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas3.jpg"),
-                                fit: BoxFit.cover)),
+                      child: Hero(
+                          tag: "top3",
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas3.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
-                        
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=>LoginPage(),)
                         );
                       },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30, left: 45),
-                      child: Container(
-                         width: MediaQuery.of(context).size.width * 0.4,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas4.jpg"),
-                                fit: BoxFit.cover)),
+                      child: Hero(
+                          tag: "top4",
+                        child: Container(
+                           width: MediaQuery.of(context).size.width * 0.4,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas4.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
                   ),
@@ -356,6 +370,7 @@ class _hom_scrnState extends State<hom_scrn> {
                     child: Text(
                       "BackPack 0266",
                       style: Theme.of(context).textTheme.titleMedium,
+                    
                     ),
                   ),
                 ],

@@ -38,7 +38,6 @@ class introduction extends StatelessWidget {
                   width: 200,
                   height: 160,
                   decoration: BoxDecoration(
-                    // color: Colors.black,
                     image: DecorationImage(
                       image: AssetImage("Assets/logo.png"),
                       fit: BoxFit.cover,
@@ -65,7 +64,6 @@ class introduction extends StatelessWidget {
                   width: 200,
                   height: 160,
                   decoration: BoxDecoration(
-                    // color: Colors.black,
                     image: DecorationImage(
                       image: AssetImage("Assets/logo.png"),
                       fit: BoxFit.cover,
@@ -92,7 +90,6 @@ class introduction extends StatelessWidget {
                   width: 200,
                   height: 160,
                   decoration: BoxDecoration(
-                    // color: Colors.black,
                     image: DecorationImage(
                       image: AssetImage("Assets/logo.png"),
                       fit: BoxFit.cover,
