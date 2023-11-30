@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lienna_bag/page/about_page.dart';
 import 'package:lienna_bag/page/login_page.dart';
 
 class hom_scrn extends StatefulWidget {
@@ -16,38 +17,38 @@ class _hom_scrnState extends State<hom_scrn> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
-        // onTap: (index){
-        //   if (index == 0) {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) {
-        //             return hom_scrn();
-        //           },
-        //         ),
-        //       );
-        //     }
-        //   if (index == 1) {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) {
-        //             return hom_scrn();
-        //           },
-        //         ),
-        //       );
-        //     }
-        //     if (index == 2) {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) {
-        //             return hom_scrn();
-        //           },
-        //         ),
-        //       );
-        //     }
-        // },
+        onTap: (index){
+          if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return hom_scrn();
+                  },
+                ),
+              );
+            }
+          if (index == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return About_Page();
+                  },
+                ),
+              );
+            }
+            if (index == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return hom_scrn();
+                  },
+                ),
+              );
+            }
+        },
         backgroundColor: const Color.fromARGB(255, 185, 180, 199),
         selectedItemColor: Colors.black87,
         unselectedItemColor: Color.fromARGB(255, 86, 84, 84),
@@ -134,40 +135,70 @@ class _hom_scrnState extends State<hom_scrn> {
               Container(
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 15),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
+                    
+                    InkWell(
+                      onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                      child: Padding(
+                        
+                        padding: const EdgeInsets.only(top: 40, left: 15),
+                        child:Hero(
+                          tag: "Merek1",
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: MediaQuery.of(context).size.height * 0.13,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                    image: AssetImage("Assets/tas1.jpg"),
+                                    fit: BoxFit.cover)),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    InkWell(
+                      onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 30),
+                        child: Container(
+                           width: MediaQuery.of(context).size.width * 0.25,
                         height: MediaQuery.of(context).size.height * 0.13,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas1.jpg"),
-                                fit: BoxFit.cover)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas3.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 30),
-                      child: Container(
-                         width: MediaQuery.of(context).size.width * 0.25,
-                      height: MediaQuery.of(context).size.height * 0.13,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas3.jpg"),
-                                fit: BoxFit.cover)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 30),
-                      child: Container(
-                              width: MediaQuery.of(context).size.width * 0.25,
-                      height: MediaQuery.of(context).size.height * 0.13,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                                image: AssetImage("Assets/tas2.jpg"),
-                                fit: BoxFit.cover)),
+                    InkWell(
+                      onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 30),
+                        child: Container(
+                                width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.13,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/tas2.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                     ),
                   ],
@@ -207,28 +238,43 @@ class _hom_scrnState extends State<hom_scrn> {
               ),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25, left: 15),
-                    child: Container(
-                       width: MediaQuery.of(context).size.width * 0.4,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas1.jpg"),
-                              fit: BoxFit.cover)),
+                  InkWell(
+                    onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 25, left: 15),
+                      child: Container(
+                         width: MediaQuery.of(context).size.width * 0.4,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas1.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25, left: 45),
-                    child: Container(
-                       width: MediaQuery.of(context).size.width * 0.4,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas2.jpg"),
-                              fit: BoxFit.cover)),
+                  InkWell(
+                    onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 25, left: 45),
+                      child: Container(
+                         width: MediaQuery.of(context).size.width * 0.4,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas2.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
                 ],
@@ -253,28 +299,45 @@ class _hom_scrnState extends State<hom_scrn> {
               ),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 15),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas3.jpg"),
-                              fit: BoxFit.cover)),
+
+                  InkWell(
+                    onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30, left: 15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas3.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 45),
-                    child: Container(
-                       width: MediaQuery.of(context).size.width * 0.4,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          image: DecorationImage(
-                              image: AssetImage("Assets/tas4.jpg"),
-                              fit: BoxFit.cover)),
+                  InkWell(
+                    onTap: () {
+                        
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginPage(),)
+                        );
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30, left: 45),
+                      child: Container(
+                         width: MediaQuery.of(context).size.width * 0.4,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/tas4.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
                 ],
