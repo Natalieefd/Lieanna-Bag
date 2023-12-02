@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:lienna_bag/page/about_page.dart';
 import 'package:lienna_bag/page/login_page.dart';
 import 'package:lienna_bag/page/search_page.dart';
@@ -20,27 +20,27 @@ class _hom_scrnState extends State<hom_scrn> {
     var userAccount = FirebaseAuth.instance.currentUser;
     final orientation = MediaQuery.of(context).orientation;
 
-  // return StreamBuilder<DocumentSnapshot>(
-  //     stream: FirebaseFirestore.instance
-  //         .collection('user')
-  //         .doc(userAccount!.uid)
-  //         .snapshots(),
-  //     builder:
-  //         (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-  //       if (snapshot.hasError) {
-  //         return Text('Error: ${snapshot.error}');
+  return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('user')
+          .doc(userAccount!.uid)
+          .snapshots(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
 
-  //       } else if (!snapshot.hasData) {
-  //         return CircularProgressIndicator();
+        } else if (!snapshot.hasData) {
+          return CircularProgressIndicator();
 
-  //       } else if (snapshot.hasData) {
-  //         Object? usernameData = snapshot.data!.data().toString().contains('username')
-  //                 ? snapshot.data!.get('username')
-  //                 : '...';
+        } else if (snapshot.hasData) {
+          Object? usernameData = snapshot.data!.data().toString().contains('username')
+                  ? snapshot.data!.get('username')
+                  : '...';
                   
-  //         Object? profileData = snapshot.data!.data().toString().contains('profile')
-  //                 ? snapshot.data!.get('profile')
-  //                 : '';
+          Object? profileData = snapshot.data!.data().toString().contains('profile')
+                  ? snapshot.data!.get('profile')
+                  : '';
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -107,72 +107,72 @@ class _hom_scrnState extends State<hom_scrn> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-              //     ListTile(
-              //     leading: Container(
-              //   width: 30,
-              //   height: 30,
-              //   decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(20),
-              //       color: Colors.black,
-              //       image: DecorationImage(
-              //           image: NetworkImage(profileData.toString()),
-              //           fit: BoxFit.cover)),
-              // ),
-              //     title: Text('Welcome, ' + usernameData.toString()),
-              //     trailing: GestureDetector(
-              //     onTap: () {
-              //       Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => const LoginPage()),
-              //       );
-              //     },
-              //     child: Icon(
-              //       CupertinoIcons.square_arrow_right,
-              //       color: Theme.of(context).colorScheme.onBackground,
-              //       size: 30,
-              //     ),
-              //   ),
-              //   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 20),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black
-                          // image: DecorationImage(
-                          //   image: AssetImage("Assets/poster.jpg"),
-                          //   fit: BoxFit.cover)
-                          ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 10),
-                    child: Text("Welcome, User A!",
-                        style: Theme.of(context).textTheme.titleSmall),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 40, left: MediaQuery.of(context).size.width * 0.35),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
-                      },
-                      child: Icon(
-                        CupertinoIcons.square_arrow_right,
-                        color: Theme.of(context).colorScheme.onBackground,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ],
+              // Row(
+              //   children: [
+                  ListTile(
+                  leading: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black,
+                    image: DecorationImage(
+                        image: NetworkImage(profileData.toString()),
+                        fit: BoxFit.cover)),
               ),
+                  title: Text('Welcome, ' + usernameData.toString()),
+                  trailing: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
+                  },
+                  child: Icon(
+                    CupertinoIcons.square_arrow_right,
+                    color: Theme.of(context).colorScheme.onBackground,
+                    size: 30,
+                  ),
+                ),
+                ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(top: 40, left: 20),
+              //       child: Container(
+              //         width: 30,
+              //         height: 30,
+              //         decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(20),
+              //             color: Colors.black
+              //             // image: DecorationImage(
+              //             //   image: AssetImage("Assets/poster.jpg"),
+              //             //   fit: BoxFit.cover)
+              //             ),
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(top: 40, left: 10),
+              //       child: Text("Welcome, User A!",
+              //           style: Theme.of(context).textTheme.titleSmall),
+              //     ),
+              //     Padding(
+              //       padding: EdgeInsets.only(top: 40, left: MediaQuery.of(context).size.width * 0.35),
+              //       child: GestureDetector(
+              //         onTap: () {
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(builder: (context) => LoginPage()),
+              //           );
+              //         },
+              //         child: Icon(
+              //           CupertinoIcons.square_arrow_right,
+              //           color: Theme.of(context).colorScheme.onBackground,
+              //           size: 30,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Container(
@@ -435,9 +435,9 @@ class _hom_scrnState extends State<hom_scrn> {
         ],
       ),
     );
-     }
-    //   return CircularProgressIndicator();
-    //},
-  //);
   }
-//}
+      return Center(child: CircularProgressIndicator());
+    },
+  );
+  }
+}
