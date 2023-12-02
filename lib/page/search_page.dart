@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:lienna_bag/page/about_page.dart';
+import 'package:lienna_bag/page/bag_details.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -12,28 +11,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool isSnackBarDisplay = false;
+  String searchTas = '';
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
+
   @override
   void initState() {
-    getClientStream();
+    _initData();
     super.initState();
   }
 
-  void onSearchTextChanged(String query) {
-    _searchResult.clear();
-    if (query.isEmpty) {
-      setState(() {});
-      return;
-    }
-
-    for (var item in _allResults) {
-      if (item['nama'].toLowerCase().contains(query.toLowerCase())) {
-        _searchResult.add(item);
-      }
-    }
-    setState(() {});
-  }
-
-  getClientStream() async {
+  Future<void> getClientStream() async {
     var data = await FirebaseFirestore.instance
         .collection('tas')
         .orderBy('nama')
@@ -44,21 +32,49 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  List _allResults = [];
-  final List _searchResult = [];  
-  final TextEditingController _searchController = TextEditingController();
+  void _initData() async {
+    await getClientStream();
+  }
+
+  void _showSnackBar(BuildContext context) {
+    if (!isSnackBarDisplay) {
+      Future.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: const Color.fromARGB(255, 129, 36, 29),
+            content: const Text(
+              'Not Found!',
+              style: TextStyle(color: Colors.white),
+            ),
+            action: SnackBarAction(
+              label: 'OK',
+              textColor: Colors.white,
+              onPressed: () {
+                isSnackBarDisplay = false;
+              },
+            ),
+          ),
+        );
+      });
+      isSnackBarDisplay = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> filteredBags =
+        _allResults.where((bag) {
+      final name = bag['nama'].toString().toLowerCase();
+      return name.contains(searchTas.toLowerCase());
+    }).toList();
+
+    if (searchTas.isNotEmpty && filteredBags.isEmpty) {
+      _showSnackBar(context);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF9D8D8D),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: const Text(
           'SEARCH',
           textAlign: TextAlign.center,
@@ -122,8 +138,11 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                     child: TextField(
-                      controller: _searchController,
-                      onChanged: onSearchTextChanged,
+                      onChanged: (value) {
+                        setState(() {
+                          searchTas = value;
+                        });
+                      },
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                         fontWeight: FontWeight.normal,
@@ -137,9 +156,7 @@ class _SearchPageState extends State<SearchPage> {
                           fontSize: 18,
                           color: Color.fromARGB(255, 116, 78, 78),
                         ),
-                        suffixIcon: Icon(
-                          Icons.search_rounded
-                        ),
+                        suffixIcon: Icon(Icons.search_rounded),
                       ),
                     ),
                   ),
@@ -147,32 +164,31 @@ class _SearchPageState extends State<SearchPage> {
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: _searchResult.isNotEmpty
-                        ? _searchResult.length
-                        : _allResults.length,
+                    itemCount: filteredBags.length,
                     itemBuilder: (context, index) {
-                      final item = _searchResult.isNotEmpty
-                          ? _searchResult[index]
-                          : _allResults[index];
                       return ListTile(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (item) => const AboutPage(),
-                          ));
+                            MaterialPageRoute(
+                              builder: (item) =>
+                                  Bag_Details(itemId: filteredBags[index].id),
+                            )
+                          );
                         },
                         leading: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.white,
-                          backgroundImage: NetworkImage(item['gambar']),
+                          backgroundImage:
+                              NetworkImage(filteredBags[index]['gambar']),
                         ),
                         title: Text(
-                          item['nama'],
+                          filteredBags[index]['nama'],
                           style: const TextStyle(fontSize: 16),
                         ),
-                        subtitle: Text(item['jenis']),
-                        trailing:
-                            Text(CurrencyFormat.convertToIdr(item['harga'], 0)),
+                        subtitle: Text(filteredBags[index]['jenis']),
+                        trailing: Text(CurrencyFormat.convertToIdr(
+                            filteredBags[index]['harga'], 0)),
                       );
                     },
                   ),
