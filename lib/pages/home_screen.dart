@@ -44,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           BottomNavigationBarItem(
-              label: "Search", icon: Icon(Icons.search_rounded)),
+              label: "Search",
+               icon: Icon(Icons.search_rounded)),
           BottomNavigationBarItem(
             label: "Profile",
             icon: Icon(
@@ -103,8 +104,8 @@ class HomePage extends StatelessWidget {
 
           return Scaffold(
             //** Pilih salah satu antara pake Appbar atau ListTile
-            //tampilan menggunakan Appbar
-            //** belum dirapikan */
+            // tampilan menggunakan Appbar
+            // ** belum dirapikan */
             appBar: AppBar(
               leading: Container(
                 width: 30,

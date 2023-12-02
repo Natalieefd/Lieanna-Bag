@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lienna_bag/page/about_page.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:lienna_bag/page/search_page.dart';
 
 class hom_scrn extends StatefulWidget {
   const hom_scrn({super.key});
@@ -13,6 +16,31 @@ class hom_scrn extends StatefulWidget {
 class _hom_scrnState extends State<hom_scrn> {
   @override
   Widget build(BuildContext context) {
+    
+    var userAccount = FirebaseAuth.instance.currentUser;
+    final orientation = MediaQuery.of(context).orientation;
+
+  // return StreamBuilder<DocumentSnapshot>(
+  //     stream: FirebaseFirestore.instance
+  //         .collection('user')
+  //         .doc(userAccount!.uid)
+  //         .snapshots(),
+  //     builder:
+  //         (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+  //       if (snapshot.hasError) {
+  //         return Text('Error: ${snapshot.error}');
+
+  //       } else if (!snapshot.hasData) {
+  //         return CircularProgressIndicator();
+
+  //       } else if (snapshot.hasData) {
+  //         Object? usernameData = snapshot.data!.data().toString().contains('username')
+  //                 ? snapshot.data!.get('username')
+  //                 : '...';
+                  
+  //         Object? profileData = snapshot.data!.data().toString().contains('profile')
+  //                 ? snapshot.data!.get('profile')
+  //                 : '';
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -33,7 +61,7 @@ class _hom_scrnState extends State<hom_scrn> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return About_Page();
+                    return SearchPage();
                   },
                 ),
               );
@@ -43,7 +71,7 @@ class _hom_scrnState extends State<hom_scrn> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return hom_scrn();
+                    return AboutPage();
                   },
                 ),
               );
@@ -81,6 +109,33 @@ class _hom_scrnState extends State<hom_scrn> {
             children: [
               Row(
                 children: [
+              //     ListTile(
+              //     leading: Container(
+              //   width: 30,
+              //   height: 30,
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       color: Colors.black,
+              //       image: DecorationImage(
+              //           image: NetworkImage(profileData.toString()),
+              //           fit: BoxFit.cover)),
+              // ),
+              //     title: Text('Welcome, ' + usernameData.toString()),
+              //     trailing: GestureDetector(
+              //     onTap: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => const LoginPage()),
+              //       );
+              //     },
+              //     child: Icon(
+              //       CupertinoIcons.square_arrow_right,
+              //       color: Theme.of(context).colorScheme.onBackground,
+              //       size: 30,
+              //     ),
+              //   ),
+              //   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40, left: 20),
                     child: Container(
@@ -380,5 +435,9 @@ class _hom_scrnState extends State<hom_scrn> {
         ],
       ),
     );
+     }
+    //   return CircularProgressIndicator();
+    //},
+  //);
   }
-}
+//}
