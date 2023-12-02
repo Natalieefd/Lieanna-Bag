@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:lienna_bag/firebase_options.dart';
-import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/introduction.dart';
 import 'package:lienna_bag/pages/home_screen.dart';
+import 'package:lienna_bag/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
