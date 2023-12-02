@@ -45,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   List _allResults = [];
-  final List _searchResult = [];  
+  final List _searchResult = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -137,9 +137,7 @@ class _SearchPageState extends State<SearchPage> {
                           fontSize: 18,
                           color: Color.fromARGB(255, 116, 78, 78),
                         ),
-                        suffixIcon: Icon(
-                          Icons.search_rounded
-                        ),
+                        suffixIcon: Icon(Icons.search_rounded),
                       ),
                     ),
                   ),
@@ -157,9 +155,10 @@ class _SearchPageState extends State<SearchPage> {
                       return ListTile(
                         onTap: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (item) => const AboutPage(),
-                          ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (item) => const About_Page(),
+                              ));
                         },
                         leading: CircleAvatar(
                           radius: 30,
