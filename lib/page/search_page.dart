@@ -14,7 +14,7 @@ class _SearchPageState extends State<SearchPage> {
   bool isSnackBarDisplay = false;
   String searchTas = '';
   List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
-
+  
   @override
   void initState() {
     _initData();
@@ -169,19 +169,15 @@ class _SearchPageState extends State<SearchPage> {
                       return ListTile(
                         onTap: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (item) =>
-                                  Bag_Details(itemId: filteredBags[index].id),
-                            )
-                          );
+                              context,
+                              MaterialPageRoute(
+                                builder: (item) => BagDetails(itemId: filteredBags[index].id),
+                              ));
                         },
                         leading: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
-                          backgroundImage:
-                              NetworkImage(filteredBags[index]['gambar']),
-                        ),
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                            backgroundImage: NetworkImage(filteredBags[index]['gambar'])),
                         title: Text(
                           filteredBags[index]['nama'],
                           style: const TextStyle(fontSize: 16),

@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/page/search_page.dart';
 
-class Bag_Details extends StatefulWidget {
+class BagDetails extends StatefulWidget {
   final String itemId;
-  const Bag_Details({super.key, required this.itemId});
+  const BagDetails({super.key, required this.itemId});
 
   @override
-  State<Bag_Details> createState() => _Bag_DetailsState();
+  State<BagDetails> createState() => _BagDetailsState();
 }
 
-class _Bag_DetailsState extends State<Bag_Details> {
+class _BagDetailsState extends State<BagDetails> {
   String selectedColor = 'Grey';
   bool isFavorite = false;
 
@@ -31,16 +31,21 @@ class _Bag_DetailsState extends State<Bag_Details> {
   String itemName = '';
   String itemDescription = '';
   int itemPrice = 0;
-  String itemType = ''; 
+  String itemType = '';
 
   Future<void> fetchData(String itemId) async {
-    var document = await FirebaseFirestore.instance
+    var document = await FirebaseFirestore.instance.collection('tas').doc(itemId).get();
+
+    var desain = await FirebaseFirestore.instance
         .collection('tas')
         .doc(itemId)
+        .collection('desain')
         .get();
 
+    var desainDocument = desain.docs[0];
+
     setState(() {
-      itemImage = document['gambar'];
+      itemImage = desainDocument['gambar'];
       itemName = document['nama'];
       itemDescription = document['deskripsi'];
       itemPrice = document['harga'];
@@ -64,7 +69,7 @@ class _Bag_DetailsState extends State<Bag_Details> {
                 widget.itemId,
                 // 'HEYLOOK BACKPACK KIERRA',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontFamily: 'Poppins',
@@ -78,36 +83,32 @@ class _Bag_DetailsState extends State<Bag_Details> {
           Column(
             children: [
               Positioned(
-                child: Container(
-                  child: GestureDetector(
-                    // onTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => Merk_Page(),
-                    //     ),
-                    //   );
-                    // },
-                    child: Container(
-                      width: lebar,
-                      height: 250,
-                      alignment: AlignmentDirectional.center,
-                      decoration: ShapeDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            itemImage,
-                          ),
-                          // AssetImage(
-                          //   // colorMap[selectedColor]!
-                          // ),
-                          fit: BoxFit.contain,
-                          
+                child: GestureDetector(
+                  // onTap: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => Merk_Page(),
+                  //     ),
+                  //   );
+                  // },
+                  child: Container(
+                    width: lebar,
+                    height: 250,
+                    alignment: AlignmentDirectional.center,
+                    decoration: ShapeDecoration(
+                      image: DecorationImage(
+                        image: 
+                        AssetImage(
+                          colorMap[selectedColor]!
                         ),
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                            // borderRadius: BorderRadius.circular(10),
-                            ),
+                        fit: BoxFit.contain,
+
                       ),
+                      color: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          // borderRadius: BorderRadius.circular(10),
+                          ),
                     ),
                   ),
                 ),
@@ -130,7 +131,7 @@ class _Bag_DetailsState extends State<Bag_Details> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -139,24 +140,24 @@ class _Bag_DetailsState extends State<Bag_Details> {
                       itemName,
                       // 'HEYLOOK BACKPACK KIERRA',
                       textAlign: TextAlign.justify,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       itemDescription,
                       // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
                       textAlign: TextAlign.justify,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
@@ -194,15 +195,13 @@ class _Bag_DetailsState extends State<Bag_Details> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {
-                            
-                          },
-                          icon: Icon(
+                          onPressed: () {},
+                          icon: const Icon(
                             Icons.favorite_sharp,
                           ),
                         )
                       ],
-                    ),                    
+                    ),
                     ButtonSegment(
                       colorMap: colorMap,
                       selectedColor: selectedColor,
@@ -225,7 +224,7 @@ class _Bag_DetailsState extends State<Bag_Details> {
                       textAlign: TextAlign.justify,
                       CurrencyFormat.convertToIdr(itemPrice, 0),
                       // 'Rp165.000',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
@@ -244,7 +243,7 @@ class _Bag_DetailsState extends State<Bag_Details> {
                       textAlign: TextAlign.justify,
                       itemType,
                       // 'Tas Ransel Wanita',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
@@ -267,7 +266,7 @@ class ButtonSegment extends StatelessWidget {
   final Function(String) onColorSelected;
 
   const ButtonSegment({
-    super.key, 
+    super.key,
     required this.colorMap,
     required this.selectedColor,
     required this.onColorSelected,
@@ -288,7 +287,9 @@ class ButtonSegment extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: isSelected ? const Color.fromRGBO(76, 83, 114, 1) : Colors.white,
+              color: isSelected
+                  ? const Color.fromRGBO(76, 83, 114, 1)
+                  : Colors.white,
               borderRadius: BorderRadius.circular(8.0),
               border: Border.all(
                 color: isSelected ? Colors.white : Colors.black,
