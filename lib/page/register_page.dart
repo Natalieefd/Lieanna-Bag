@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
   //untuk mengecek inputan empty
   bool usernameVal = false;
   bool emailVal = false;
+  bool emailCheck = false;
   bool passwordVal = false;
   bool confPasswordVal = false;
   bool checkVal = false;
@@ -97,30 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<void> addUser() {
-    final username = _usernameController.value.text;
-    final email = _emailController.value.text;
-    final password = _passwordController.value.text;
-    final confPassword = _confPasswordController.value.text;
-
-    int number = 0;
-
-    setState(() {
-      number += number;
-    });
-
-    return user
-        .add({
-          'id': number,
-          'username': username,
-          'email': email,
-          'password': password,
-          'profile': "default",
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
-  }
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -155,15 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
             visible: true,
             child: Column(
               children: [
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: const BoxDecoration(
-                      //gambar sementara
-                      // image: DecorationImage(
-                      // image: AssetImage("Assets/login.png")),
-                      ),
-                ),
+                SizedBox(height: 250),
                 Padding(
                   padding: const EdgeInsets.only(top: 70, left: 35, right: 35),
                   child: SizedBox(
@@ -199,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
         duration: const Duration(seconds: 1),
         curve: Curves.ease,
         width: size.width,
-        height: form == false ? 0 : size.height - 270,
+        height: form == false ? 0 : size.height - 340,
         decoration: BoxDecoration(
             //warna sementara
             color: Theme.of(context).colorScheme.background,
@@ -208,8 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 topLeft: Radius.circular(25), topRight: Radius.circular(25))),
         child: Visibility(
           visible: form,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
               InkWell(
                 onTap: () {
@@ -217,31 +187,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     form = !form;
                   });
                 },
-                child: Container(
-                  width: size.width - 270,
-                  height: 9,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius: const BorderRadius.all(Radius.circular(10))),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60, left: 25, right: 25),
-                child: SizedBox(
-                  child: TextFormField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 10),
-                      hintText: "Username",
-                    ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(top: 10, left: 130, right: 130),
+                  child: Container(
+                    height: 7,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
                   ),
                 ),
               ),
@@ -252,15 +206,27 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
+                      fillColor: Colors.grey.shade200,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1.7),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                       ),
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Email",
+                      errorText: emailVal == true && emailCheck == false
+                          ? "invalid email"
+                          : null,
+                      errorStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.error,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ),
@@ -272,12 +238,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
+                      fillColor: Colors.grey.shade200,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1.7),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -289,6 +260,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined),
                       ),
+                      suffixIconColor: Colors.grey,
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Password",
                     ),
@@ -303,12 +275,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: _confPasswordController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
+                      fillColor: Colors.grey.shade200,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1.7),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -320,6 +297,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined),
                       ),
+                      suffixIconColor: Colors.grey,
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Confirm Password",
                     ),
@@ -332,9 +310,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: CheckboxListTile(
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text(
-                    "By using this application, you agree to its Privacy Policy and Terms of Use",
+                    "i have read and agree to the privacy policy",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.normal,
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
@@ -356,14 +334,14 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 60, bottom: 30, left: 85, right: 85),
+                    top: 30, bottom: 30, left: 85, right: 85),
                 child: SizedBox(
                   width: size.width - 55,
                   child: CupertinoButton.filled(
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
                     child: const Text("Sign Up"),
                     onPressed: () async {
-
+                      // final username = _usernameController.value.text;
                       final email = _emailController.value.text;
                       final password = _passwordController.value.text;
                       final confPassword = _confPasswordController.value.text;
@@ -373,18 +351,20 @@ class _RegisterPageState extends State<RegisterPage> {
                           : alert(context, "Waring",
                               "Confirmasi Password harus sama!");
 
-                      if (usernameVal == true && emailVal == true &&
-                          passwordVal == true && confPass == true &&
+                      if (
+                        // usernameVal == true &&
+                          emailVal == true &&
+                          passwordVal == true &&
+                          confPass == true &&
                           checkVal == true) {
-
                         try {
                           setState(() => loading = true);
 
                           //membuat akun baru
                           await Auth().register(email, password);
-
+                          
                           //input data user ke firestore
-                          addUser();
+                          // addUser(email, password);
 
                           setState(() => loading = false);
 
@@ -398,11 +378,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         } catch (e) {
                           print(e);
                         }
-
                       } else if (checkVal == false) {
                         alert(context, "Waring",
-                            "Mohon setujui Privacy Police dan Terms of Use");
-
+                            "Mohon setujui Privacy Police terlebih dahulu!");
                       } else {
                         alert(context, "Waring",
                             "Mohon lengkapi data register terlebih dahulu!");
