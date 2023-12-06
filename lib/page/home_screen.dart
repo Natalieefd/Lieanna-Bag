@@ -14,45 +14,35 @@ class hom_scrn extends StatefulWidget {
 }
 
 class _hom_scrnState extends State<hom_scrn> {
-
   @override
   Widget build(BuildContext context) {
     var userCollection = FirebaseFirestore.instance.collection('user');
     var userID = FirebaseAuth.instance.currentUser!.uid;
-    
+
     final orientation = MediaQuery.of(context).orientation;
-    
+
     return StreamBuilder<DocumentSnapshot>(
-      stream:
-      userCollection
-          .doc(userID)
-          .snapshots(),
+      stream: userCollection.doc(userID).snapshots(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
-
         } else if (!snapshot.hasData) {
-          return Center(child: Padding(
+          return Center(
+              child: Padding(
             padding: const EdgeInsets.all(30),
             child: CircularProgressIndicator(),
           ));
-
         } else if (snapshot.hasData) {
           Object? usernameData =
               snapshot.data!.data().toString().contains('username')
-                  ?
-                  snapshot.data!.get('username')
-                  :
-                  '...'
-                  ;
+                  ? snapshot.data!.get('username')
+                  : '...';
 
           Object? profileData =
               snapshot.data!.data().toString().contains('profile')
                   ? snapshot.data!.get('profile')
-                  :
-                  ''
-                  ;
+                  : '';
 
           return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
@@ -89,9 +79,9 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
               },
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              selectedItemColor: Theme.of(context).colorScheme.onSecondary,
-              unselectedItemColor: Theme.of(context).colorScheme.onBackground,
+              // backgroundColor: Theme.of(context).colorScheme.secondary,
+              // selectedItemColor: Theme.of(context).colorScheme.onSecondary,
+              // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
               items: [
                 BottomNavigationBarItem(
                   label: "Home",
@@ -123,26 +113,28 @@ class _hom_scrnState extends State<hom_scrn> {
                     //   children: [
                     ListTile(
                       leading: profileData.toString() == ''
-                      ? Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black,
-                            image: DecorationImage(
-                                image: AssetImage('Assets/profile_default.png'),
-                                fit: BoxFit.cover)),
-                      )
-                      : Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black,
-                            image: DecorationImage(
-                                image: NetworkImage(profileData.toString()),
-                                fit: BoxFit.cover)),
-                      ),
+                          ? Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.black,
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'Assets/profile_default.png'),
+                                      fit: BoxFit.cover)),
+                            )
+                          : Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.black,
+                                  image: DecorationImage(
+                                      image:
+                                          NetworkImage(profileData.toString()),
+                                      fit: BoxFit.cover)),
+                            ),
                       title: Text('Welcome, $usernameData'),
                       trailing: GestureDetector(
                         onTap: () {
@@ -474,7 +466,8 @@ class _hom_scrnState extends State<hom_scrn> {
             ),
           );
         }
-        return Center(child: Padding(
+        return Center(
+            child: Padding(
           padding: const EdgeInsets.all(40),
           child: CircularProgressIndicator(),
         ));

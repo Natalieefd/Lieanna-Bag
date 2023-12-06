@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/edit_profile.dart';
+import 'package:lienna_bag/page/home_screen.dart';
+import 'package:lienna_bag/page/search_page.dart';
 import 'package:lienna_bag/page/settings.dart' as app_settings;
 import 'package:lienna_bag/page/favorite_page.dart';
 import 'package:provider/provider.dart';
@@ -70,6 +73,63 @@ class Profile extends StatelessWidget {
                     ),
                   ],
                 )),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: 0,
+              onTap: (index) {
+                if (index == 0) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return hom_scrn();
+                      },
+                    ),
+                  );
+                }
+                if (index == 1) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SearchPage();
+                      },
+                    ),
+                  );
+                }
+                if (index == 2) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Profile();
+                      },
+                    ),
+                  );
+                }
+              },
+              // backgroundColor:
+              //     Provider.of<ThemeModeData>(context).containerColor,
+              items: [
+                BottomNavigationBarItem(
+                  label: "Home",
+                  icon: Icon(
+                    CupertinoIcons.home,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Search",
+                  icon: Icon(
+                    CupertinoIcons.search,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Profile",
+                  icon: Icon(
+                    CupertinoIcons.profile_circled,
+                  ),
+                ),
+              ],
+            ),
             body: ListView(
               children: [
                 Container(
