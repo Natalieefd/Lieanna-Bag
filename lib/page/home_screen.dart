@@ -22,7 +22,6 @@ class _hom_scrnState extends State<hom_scrn> {
     var userID = FirebaseAuth.instance.currentUser!.uid;
 
     final orientation = MediaQuery.of(context).orientation;
-
     return StreamBuilder<DocumentSnapshot>(
       stream: userCollection.doc(userID).snapshots(),
       builder:
@@ -47,6 +46,41 @@ class _hom_scrnState extends State<hom_scrn> {
                   : '';
 
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor:
+                  Provider.of<ThemeModeData>(context).containerColor,
+              leading: profileData.toString() == ''
+                  ? Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: Container(
+                        width: 50,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                            image: DecorationImage(
+                                image: AssetImage('Assets/profile_default.png'),
+                                fit: BoxFit.cover)),
+                      ),
+                    )
+                  : Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: Container(
+                        width: 50,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                            image: DecorationImage(
+                                image: NetworkImage(profileData.toString()),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+              title: Text('Welcome, $usernameData',
+                  style: Theme.of(context).textTheme.headlineMedium),
+            ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor:
                   Provider.of<ThemeModeData>(context).containerColor,
@@ -114,55 +148,57 @@ class _hom_scrnState extends State<hom_scrn> {
                   children: [
                     // Row(
                     //   children: [
-                    ListTile(
-                      leading: profileData.toString() == ''
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, top: 10, bottom: 10),
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black,
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'Assets/profile_default.png'),
-                                        fit: BoxFit.cover)),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, top: 10, bottom: 10),
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black,
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            profileData.toString()),
-                                        fit: BoxFit.cover)),
-                              ),
-                            ),
-                      title: Text('Welcome, $usernameData',
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                          );
-                        },
-                        child: Icon(
-                          CupertinoIcons.square_arrow_right,
-                          color: Theme.of(context).colorScheme.onBackground,
-                          size: 30,
-                        ),
-                      ),
-                    ),
+                    // ListTile(
+                    //   tileColor:
+                    //       Provider.of<ThemeModeData>(context).containerColor,
+                    //   leading: profileData.toString() == ''
+                    //       ? Padding(
+                    //           padding: const EdgeInsets.only(
+                    //               left: 10, top: 10, bottom: 10),
+                    //           child: Container(
+                    //             width: 50,
+                    //             height: 60,
+                    //             decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(10),
+                    //                 color: Colors.black,
+                    //                 image: DecorationImage(
+                    //                     image: AssetImage(
+                    //                         'Assets/profile_default.png'),
+                    //                     fit: BoxFit.cover)),
+                    //           ),
+                    //         )
+                    //       : Padding(
+                    //           padding: const EdgeInsets.only(
+                    //               left: 10, top: 10, bottom: 10),
+                    //           child: Container(
+                    //             width: 50,
+                    //             height: 60,
+                    //             decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(10),
+                    //                 color: Colors.black,
+                    //                 image: DecorationImage(
+                    //                     image: NetworkImage(
+                    //                         profileData.toString()),
+                    //                     fit: BoxFit.cover)),
+                    //           ),
+                    //         ),
+                    //   title: Text('Welcome, $usernameData',
+                    //       style: Theme.of(context).textTheme.headlineMedium),
+                    //   trailing: GestureDetector(
+                    //     onTap: () {
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const LoginPage()),
+                    //       );
+                    //     },
+                    //     child: Icon(
+                    //       CupertinoIcons.square_arrow_right,
+                    //       color: Theme.of(context).colorScheme.onBackground,
+                    //       size: 30,
+                    //     ),
+                    //   ),
+                    // ),
 
                     Container(
                       width: MediaQuery.of(context).size.width,
