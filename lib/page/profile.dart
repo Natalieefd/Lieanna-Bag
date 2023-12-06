@@ -64,10 +64,12 @@ class Profile extends StatelessWidget {
               centerTitle: true,
             ),
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor:
+                  Provider.of<ThemeModeData>(context).containerColor,
               currentIndex: 0,
               onTap: (index) {
                 if (index == 0) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -77,7 +79,7 @@ class Profile extends StatelessWidget {
                   );
                 }
                 if (index == 1) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -87,7 +89,7 @@ class Profile extends StatelessWidget {
                   );
                 }
                 if (index == 2) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -97,8 +99,7 @@ class Profile extends StatelessWidget {
                   );
                 }
               },
-              // backgroundColor:
-              //     Provider.of<ThemeModeData>(context).containerColor,
+              selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
               items: [
                 BottomNavigationBarItem(
                   label: "Home",

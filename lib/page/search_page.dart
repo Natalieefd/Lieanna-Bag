@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/bag_details.dart';
+import 'package:lienna_bag/page/home_screen.dart';
+import 'package:lienna_bag/page/profile.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
@@ -84,6 +87,63 @@ class _SearchPageState extends State<SearchPage> {
         ),
         centerTitle: true,
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return hom_scrn();
+                },
+              ),
+            );
+          }
+          if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return SearchPage();
+                },
+              ),
+            );
+          }
+          if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return Profile();
+                },
+              ),
+            );
+          }
+        },
+        selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
+        items: [
+          BottomNavigationBarItem(
+            label: "Home",
+            icon: Icon(
+              CupertinoIcons.home,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "Search",
+            icon: Icon(
+              CupertinoIcons.search,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(
+              CupertinoIcons.profile_circled,
+            ),
+          ),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -113,8 +173,9 @@ class _SearchPageState extends State<SearchPage> {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 41.0, right: 41.0, bottom: 10),
+                  // padding: const EdgeInsets.only(
+                  //     left: 41.0, right: 41.0, bottom: 10),
+                  padding: const EdgeInsets.all(15),
                   child: Container(
                     width: 278,
                     height: 35,
@@ -164,10 +225,11 @@ class _SearchPageState extends State<SearchPage> {
                               ));
                         },
                         leading: CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.white,
-                            backgroundImage:
-                                NetworkImage(filteredBags[index]['gambar'])),
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                          backgroundImage:
+                              NetworkImage(filteredBags[index]['gambar']),
+                        ),
                         title: Text(
                           filteredBags[index]['nama'],
                           style: const TextStyle(fontSize: 16),

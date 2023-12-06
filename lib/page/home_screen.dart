@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/login_page.dart';
 import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
+import 'package:provider/provider.dart';
 
 class hom_scrn extends StatefulWidget {
   const hom_scrn({super.key});
@@ -46,10 +48,12 @@ class _hom_scrnState extends State<hom_scrn> {
 
           return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor:
+                  Provider.of<ThemeModeData>(context).containerColor,
               currentIndex: 0,
               onTap: (index) {
                 if (index == 0) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -59,7 +63,7 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
                 if (index == 1) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -69,7 +73,7 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
                 if (index == 2) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -79,8 +83,7 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
               },
-              // backgroundColor: Theme.of(context).colorScheme.secondary,
-              // selectedItemColor: Theme.of(context).colorScheme.onSecondary,
+              selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
               // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
               items: [
                 BottomNavigationBarItem(
@@ -113,29 +116,38 @@ class _hom_scrnState extends State<hom_scrn> {
                     //   children: [
                     ListTile(
                       leading: profileData.toString() == ''
-                          ? Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.black,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'Assets/profile_default.png'),
-                                      fit: BoxFit.cover)),
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 10, bottom: 10),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.black,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'Assets/profile_default.png'),
+                                        fit: BoxFit.cover)),
+                              ),
                             )
-                          : Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.black,
-                                  image: DecorationImage(
-                                      image:
-                                          NetworkImage(profileData.toString()),
-                                      fit: BoxFit.cover)),
+                          : Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 10, bottom: 10),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.black,
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            profileData.toString()),
+                                        fit: BoxFit.cover)),
+                              ),
                             ),
-                      title: Text('Welcome, $usernameData'),
+                      title: Text('Welcome, $usernameData',
+                          style: Theme.of(context).textTheme.headlineMedium),
                       trailing: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -151,53 +163,14 @@ class _hom_scrnState extends State<hom_scrn> {
                         ),
                       ),
                     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(top: 40, left: 20),
-                    //       child: Container(
-                    //         width: 30,
-                    //         height: 30,
-                    //         decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(20),
-                    //             color: Colors.black
-                    //             // image: DecorationImage(
-                    //             //   image: AssetImage("Assets/poster.jpg"),
-                    //             //   fit: BoxFit.cover)
-                    //             ),
-                    //       ),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(top: 40, left: 10),
-                    //       child: Text("Welcome, User A!",
-                    //           style: Theme.of(context).textTheme.titleSmall),
-                    //     ),
-                    //     Padding(
-                    //       padding: EdgeInsets.only(top: 40, left: MediaQuery.of(context).size.width * 0.35),
-                    //       child: GestureDetector(
-                    //         onTap: () {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => LoginPage()),
-                    //           );
-                    //         },
-                    //         child: Icon(
-                    //           CupertinoIcons.square_arrow_right,
-                    //           color: Theme.of(context).colorScheme.onBackground,
-                    //           size: 30,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("Assets/poster.jpg"),
-                                fit: BoxFit.cover)),
-                      ),
+
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("Assets/poster.jpg"),
+                              fit: BoxFit.cover)),
                     ),
 
                     Container(

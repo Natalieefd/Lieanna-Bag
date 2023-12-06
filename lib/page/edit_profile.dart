@@ -89,7 +89,7 @@ class _EditProfileState extends State<EditProfile> {
       content: const Text("Successfully edit profile"),
       duration: const Duration(seconds: 3),
       padding: const EdgeInsets.all(10),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
     );
 
     return StreamBuilder<DocumentSnapshot>(
@@ -215,7 +215,8 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Provider.of<ThemeModeData>(context)
+                                    .containerColor,
                                 width: 1.7),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
