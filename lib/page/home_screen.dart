@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lienna_bag/page/about_page.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
 
 class hom_scrn extends StatefulWidget {
@@ -14,32 +14,45 @@ class hom_scrn extends StatefulWidget {
 }
 
 class _hom_scrnState extends State<hom_scrn> {
+
   @override
   Widget build(BuildContext context) {
-    var userAccount = FirebaseAuth.instance.currentUser;
+    var userCollection = FirebaseFirestore.instance.collection('user');
+    var userID = FirebaseAuth.instance.currentUser!.uid;
+    
     final orientation = MediaQuery.of(context).orientation;
-
+    
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('user')
-          .doc(userAccount!.uid)
+      stream:
+      userCollection
+          .doc(userID)
           .snapshots(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
+
         } else if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return Center(child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: CircularProgressIndicator(),
+          ));
+
         } else if (snapshot.hasData) {
           Object? usernameData =
               snapshot.data!.data().toString().contains('username')
-                  ? snapshot.data!.get('username')
-                  : '...';
+                  ?
+                  snapshot.data!.get('username')
+                  :
+                  '...'
+                  ;
 
           Object? profileData =
               snapshot.data!.data().toString().contains('profile')
                   ? snapshot.data!.get('profile')
-                  : '';
+                  :
+                  ''
+                  ;
 
           return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
@@ -70,7 +83,7 @@ class _hom_scrnState extends State<hom_scrn> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return About_Page();
+                        return Profile();
                       },
                     ),
                   );
@@ -109,7 +122,18 @@ class _hom_scrnState extends State<hom_scrn> {
                     // Row(
                     //   children: [
                     ListTile(
-                      leading: Container(
+                      leading: profileData.toString() == ''
+                      ? Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black,
+                            image: DecorationImage(
+                                image: AssetImage('Assets/profile_default.png'),
+                                fit: BoxFit.cover)),
+                      )
+                      : Container(
                         width: 30,
                         height: 30,
                         decoration: BoxDecoration(
@@ -119,7 +143,7 @@ class _hom_scrnState extends State<hom_scrn> {
                                 image: NetworkImage(profileData.toString()),
                                 fit: BoxFit.cover)),
                       ),
-                      title: Text('Welcome, ' + usernameData.toString()),
+                      title: Text('Welcome, $usernameData'),
                       trailing: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -450,7 +474,10 @@ class _hom_scrnState extends State<hom_scrn> {
             ),
           );
         }
-        return Center(child: CircularProgressIndicator());
+        return Center(child: Padding(
+          padding: const EdgeInsets.all(40),
+          child: CircularProgressIndicator(),
+        ));
       },
     );
   }

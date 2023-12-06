@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,28 +15,18 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
-  //untuk icon lihat password
-  bool pressPass = false;
-  bool pressConfPass = false;
-
   //variable untuk tampilkan animasi loading
   bool loading = false;
 
-  //untuk validasi confirmasi password
-  bool confPass = false;
-
   //untuk mengecek inputan empty
   bool usernameVal = false;
-  bool emailVal = false;
-  bool passwordVal = false;
-  bool confPasswordVal = false;
   String imageUrl = "";
 
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confPasswordController = TextEditingController();
+
+  var userCollection = FirebaseFirestore.instance.collection('user');
+  var user = FirebaseAuth.instance.currentUser;
+  var userID = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {
@@ -47,30 +36,12 @@ class _EditProfileState extends State<EditProfile> {
         usernameVal = _usernameController.text.isNotEmpty;
       });
     });
-    _emailController.addListener(() {
-      setState(() {
-        emailVal = _emailController.text.isNotEmpty;
-      });
-    });
-    _passwordController.addListener(() {
-      setState(() {
-        passwordVal = _passwordController.text.isNotEmpty;
-      });
-    });
-    _confPasswordController.addListener(() {
-      setState(() {
-        confPasswordVal = _confPasswordController.text.isNotEmpty;
-      });
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _usernameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confPasswordController.dispose();
   }
 
   Future<dynamic> alert(BuildContext context, String judul, String kontent) {
@@ -93,35 +64,18 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  Future<void> updateUser() async {
-    var userEmail = FirebaseAuth.instance.currentUser;
-    var userAccount = FirebaseAuth.instance.currentUser;
-
-  final CollectionReference user =
-      FirebaseFirestore.instance.collection('user');
-
-    final Future<QuerySnapshot<Map<String, dynamic>>> userData =
-      FirebaseFirestore.instance.collection('user').where('email', isEqualTo: userEmail).get();
-    
-    // Future<QuerySnapshot<Map<String, dynamic>>> listUser = userData;
-
-    // final id = listUser;
-    final username = _usernameController.value.text;
-    final email = _emailController.value.text;
-    final password = _passwordController.value.text;
-
-    userAccount!.updateEmail(email);
-    userAccount.updatePassword(password);
-
-    return user
-        .doc().set({
-          'username': username,
-          'email': email,
-          'password': password,
-          'profile': "default",
-        })
-        .then((value) => print("Data Updated"))
-        .catchError((error) => print("Failed to update user: $error"));
+  Future<void> updateUser(String username, String email, String password, String userProfile) async {
+    FirebaseFirestore.instance
+      .collection('user')
+          .doc(userID)
+          .set({
+            'username': username,
+            'email': email,
+            'password' : password,
+            'profile': userProfile,
+          })
+          .then((value) => print("Data Updated"))
+          .catchError((error) => print("Failed to update user: $error"));
   }
 
   @override
@@ -135,218 +89,182 @@ class _EditProfileState extends State<EditProfile> {
       backgroundColor: Theme.of(context).colorScheme.primary,
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          "edit profile".toUpperCase(),
-          textAlign: TextAlign.center,
-        ),
-      ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40, bottom: 10),
-            child: InkWell(
-              onTap: () async {
-                // Membuat  dan menambahkan package image_picker
-                final imgPicker =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
+    return StreamBuilder<DocumentSnapshot>(
+      stream: userCollection.doc(userID).snapshots(),
+        builder: (BuildContext, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
 
-                if (imgPicker == null) return;
+          } else if (!snapshot.hasData) {
+            return CircularProgressIndicator();
 
-                String fileName =
-                    DateTime.now().microsecondsSinceEpoch.toString();
+          } else if (snapshot.hasData) {
+            Object? usernameData =
+                snapshot.data!.data().toString().contains('username')
+                    ? snapshot.data!.get('username')
+                    : '...';
 
-                // Membua reference untuk menggambil folder root pada firebase storage
-                Reference referenceRoot = FirebaseStorage.instance.ref();
-                Reference referenceImages =
-                    referenceRoot.child("images/user_profile");
+            Object? emailData =
+                snapshot.data!.data().toString().contains('email')
+                    ? snapshot.data!.get('email')
+                    : '...';
 
-                // Membuat reference untuk mengupload gambar
-                Reference referenceImageToUpload =
-                    referenceImages.child(fileName);
+            Object? passwordData =
+                snapshot.data!.data().toString().contains('password')
+                    ? snapshot.data!.get('password')
+                    : '...';
 
-                // Error handling
-                try {
-                  await referenceImageToUpload.putFile(File(imgPicker.path));
-                  imageUrl = await referenceImageToUpload.getDownloadURL();
-                } catch (e) {}
-              },
-              child: imageUrl == ""
-                  ? CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      child: ClipOval(
-                        child: Image.asset("Assets/profile_default.png",
-                            fit: BoxFit.cover),
-                      ),
-                    )
-                  : CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      child: ClipOval(
-                        child: Image.network(imageUrl, fit: BoxFit.cover),
-                      ),
-                    ),
-            ),
-          ),
-          // Padding(padding: EdgeInsets.only(top: 30, bottom: 10, left: 25, right: 25),child: ,)
-          Padding(
-                padding: const EdgeInsets.only(top: 60, left: 25, right: 25),
-                child: SizedBox(
-                  child: TextFormField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 10),
-                      hintText: "Username",
-                    ),
-                  ),
+            Object? profileData =
+                snapshot.data!.data().toString().contains('profile')
+                    ? snapshot.data!.get('profile')
+                    : '';
+
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                title: Text(
+                  "edit profile".toUpperCase(),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
-                child: SizedBox(
-                  child: TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 10),
-                      hintText: "Email",
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
-                child: SizedBox(
-                  child: TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            pressPass = !pressPass;
-                          });
-                        },
-                        child: Icon(pressPass
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined),
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 10),
-                      hintText: "Password",
-                    ),
-                    obscureText: pressPass ? false : true,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
-                child: SizedBox(
-                  child: TextFormField(
-                    controller: _confPasswordController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black12,
-                        ),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            pressConfPass = !pressConfPass;
-                          });
-                        },
-                        child: Icon(pressConfPass
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined),
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 10),
-                      hintText: "Confirm Password",
-                    ),
-                    obscureText: pressConfPass ? false : true,
-                  ),
-                ),
-              ),
+              body: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 140, bottom: 10),
+                    child: InkWell(
+                      onTap: () async {
+                        // Membuat  dan menambahkan package image_picker
+                        final imgPicker = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
               
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 60, bottom: 30, left: 85, right: 85),
-                child: SizedBox(
-                  width: size.width - 55,
-                  child: CupertinoButton.filled(
-                    borderRadius: const BorderRadius.all(Radius.circular(40)),
-                    child: const Text("Edit Profile"),
-                    onPressed: () async {
-
-                      final email = _emailController.value.text;
-                      final password = _passwordController.value.text;
-                      final confPassword = _confPasswordController.value.text;
-
-                      confPassword == password
-                          ? confPass = true
-                          : alert(context, "Waring",
-                              "Confirmasi Password harus sama!");
-
-                      if (usernameVal == true && emailVal == true &&
-                          passwordVal == true && confPass == true) {
-
+                        if (imgPicker == null) return;
+              
+                        String fileName =
+                            DateTime.now().microsecondsSinceEpoch.toString();
+              
+                        // Membua reference untuk menggambil folder root pada firebase storage
+                        Reference referenceRoot =
+                            FirebaseStorage.instance.ref();
+                        Reference referenceImages =
+                            referenceRoot.child("images/user_profile");
+              
+                        // Membuat reference untuk mengupload gambar
+                        Reference referenceImageToUpload =
+                            referenceImages.child(fileName);
+              
+                        // Error handling
                         try {
-                          setState(() => loading = true);
-
-                          //input data user ke firestore
-                          updateUser();
-
-                          setState(() => loading = false);
-
-                          ScaffoldMessenger.of(context).showSnackBar(snackBarUpdate);
-                          // Navigator.pop(context);
-
-                        } catch (e) {
-                          print(e);
-                        }
-
-                      } else {
-                        // alert(context, "Waring",
-                        //     "Mohon lengkapi data register terlebih dahulu!");
-                      }
-                    },
+                          await referenceImageToUpload
+                              .putFile(File(imgPicker.path));
+                          imageUrl =
+                              await referenceImageToUpload.getDownloadURL();
+                        } catch (e) {}
+                      },
+                      child: imageUrl == ""
+                          ? Padding(
+                            padding: const EdgeInsets.only(left: 125, right: 125),
+                            child: Container(
+                              height: 140,
+                              decoration: BoxDecoration(
+                                color: Colors.black26,
+                                borderRadius: BorderRadius.circular(80),
+                                image: DecorationImage(image: NetworkImage(profileData.toString()))
+                              ),
+                            ),
+                          )
+                          : Container(
+                            padding: const EdgeInsets.only(left: 125, right: 125),
+                            child: Container(
+                              height: 140,
+                              decoration: BoxDecoration(
+                                color: Colors.black26,
+                                borderRadius: BorderRadius.circular(80),
+                              image: DecorationImage(image: NetworkImage(imageUrl)
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Text(usernameData.toString(), textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 40, left: 25, right: 25),
+                    child: SizedBox(
+                      child: TextFormField(
+                        controller: _usernameController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey.shade200, width: 0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  width: 1.7),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          contentPadding: const EdgeInsets.only(left: 10),
+                          hintText: usernameData.toString(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 120, bottom: 30, left: 35, right: 35),
+                    child: CupertinoButton.filled(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(40)),
+                      child: const Text("Edit Profile"),
+                      onPressed: () async {
+                        final username = _usernameController.value.text;
+              
+                        if (usernameVal == true) {
+                          try {
+                            imageUrl == ''
+                            ? imageUrl = "https://firebasestorage.googleapis.com/v0/b/lieanna-bag.appspot.com/o/images%2Fuser_profile%2Fprofile_default.png?alt=media&token=10db65e2-58a3-430a-b469-6a693f7ac8c7"
+                            : null;
+              
+                            setState(() => loading = true);
+                            
+                            //update data user pada firestore
+                            updateUser(username, emailData.toString(), passwordData.toString(), imageUrl);
+              
+                            setState(() => loading = false);
+              
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBarUpdate);
+              
+                          } catch (e) {
+                            print(e);
+                          }
+                        } else {
+                          alert(context, "Waring",
+                              "Mohon lengkapi data register terlebih dahulu!");
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-        ],
-      ),
-    );
+            );
+          }
+          return Center(child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: CircularProgressIndicator(),
+          ));
+        });
   }
 }
