@@ -65,7 +65,7 @@ class introduction extends StatelessWidget {
                   height: 160,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("Assets/logo.png"),
+                      image: AssetImage("Assets/gambar2.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -75,7 +75,7 @@ class introduction extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: "Register",
+          title: "you want to try?",
           body: "If you want to try, you can register first!",
           decoration: PageDecoration(
             titleTextStyle: Theme.of(context).textTheme.bodyLarge!,
@@ -91,7 +91,7 @@ class introduction extends StatelessWidget {
                   height: 160,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("Assets/logo.png"),
+                      image: AssetImage("Assets/gambar3.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
