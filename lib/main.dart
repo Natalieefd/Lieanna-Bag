@@ -1,7 +1,13 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
+import 'package:lienna_bag/page/bag_details.dart';
 import 'package:lienna_bag/page/introduction.dart';
+import 'package:lienna_bag/page/settings.dart';
 import 'package:lienna_bag/pages/home_screen.dart';
 import 'package:lienna_bag/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -11,96 +17,98 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeModeData()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ColorScheme lightTheme = ColorScheme(
-      background: Color.fromARGB(255, 206, 190, 190), //warna backgorund
-      onBackground: Color.fromARGB(255, 0, 0, 0), // text
-      primary: Color.fromARGB(255, 226, 212, 225),
-      onPrimary: Color.fromARGB(255, 0, 0, 0), // text
-      secondary: Color.fromARGB(255, 74, 83, 114),
-      onSecondary: Color.fromARGB(255, 104, 95, 95),
-      error: Colors.red,
-      onError: Colors.red,
-      surface: Colors.red,
-      onSurface: Colors.red,
-      brightness: Brightness.light,
-    );
+    return Consumer<ThemeModeData>(
+      builder: (context, themeModeData, child) {
+        ThemeData themeData;
 
-    ColorScheme darkTheme = ColorScheme(
-      background: Color.fromARGB(255, 0, 0, 0),
-      onBackground: Color.fromARGB(255, 255, 255, 255), // text
-      primary: const Color.fromARGB(255, 122, 125, 156),
-      onPrimary: const Color.fromARGB(255, 255, 255, 255),
-      secondary: Color.fromARGB(255, 74, 83, 114),
-      onSecondary: Color.fromARGB(255, 104, 95, 95),
-       error: Colors.red,
-      onError: Colors.red,
-      surface: Colors.red,
-      onSurface: Colors.red,
-      brightness: Brightness.dark,
-    );
+        switch (themeModeData.themeMode) {
+          case ThemeMode.light:
+            themeData = _getLightThemeData();
+            break;
+          case ThemeMode.dark:
+            themeData = _getDarkThemeData();
+            break;
+          case ThemeMode.system:
+            themeData = _getSystemThemeData();
+            break;
+          default:
+            themeData = _getLightThemeData();
+        }
 
-    return MultiProvider(
-      providers: [
-        // provider yang digunakan
-        ChangeNotifierProvider(create: (context) => ThemeModeData()),
-      ],
-      child: Builder(builder: (ctx) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Lieanna Bag',
-          theme: ThemeData(
-              useMaterial3: true,
-              brightness: Brightness.light,
-              scaffoldBackgroundColor: Color.fromARGB(255, 206, 190, 190),
-              textTheme: TextTheme(
-                  bodyLarge: TextStyle(
-                      fontSize: 23,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  titleLarge: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  titleMedium: TextStyle(
-                    fontSize: 16,
-                   color: Colors.black),
-                  titleSmall: TextStyle(
-                    fontSize: 15, 
-                    color: Colors.black))),
-          darkTheme: ThemeData(
-              useMaterial3: true,
-              brightness: Brightness.light,
-              scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
-              textTheme: TextTheme(
-                  bodyLarge: TextStyle(
-                      fontSize: 23,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.bold),
-                  titleLarge: TextStyle(
-                      fontSize: 20,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.bold),
-                  titleMedium: TextStyle(
-                    fontSize: 16,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  titleSmall: TextStyle(
-                    fontSize: 15,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ))),
-          themeMode: Provider.of<ThemeModeData>(ctx).themeMode,
+          theme: themeData,
           home: introduction(),
         );
-      }),
+      },
     );
+  }
+
+  ThemeData _getLightThemeData() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: Color.fromRGBO(255, 253, 246, 1),
+      textTheme: GoogleFonts.interTextTheme(
+        TextTheme(
+          headlineLarge: TextStyle(
+            fontSize: 24,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+          headlineMedium: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  ThemeData _getDarkThemeData() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: Color.fromRGBO(41, 44, 57, 1),
+      textTheme: GoogleFonts.poppinsTextTheme(
+        TextTheme(
+          headlineLarge: TextStyle(
+            fontSize: 24,
+            color: const Color.fromARGB(255, 255, 255, 255),
+            fontWeight: FontWeight.bold,
+          ),
+          headlineMedium: TextStyle(
+            fontSize: 20,
+            color: const Color.fromARGB(255, 255, 255, 255),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  ThemeData _getSystemThemeData() {
+    final Brightness platformBrightness = window.platformBrightness;
+
+    if (platformBrightness == Brightness.dark) {
+      return _getDarkThemeData();
+    } else {
+      return _getLightThemeData();
+    }
   }
 }

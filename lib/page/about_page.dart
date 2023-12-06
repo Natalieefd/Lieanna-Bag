@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
+import 'package:provider/provider.dart';
 
 class About_Page extends StatelessWidget {
   const About_Page({super.key});
@@ -10,8 +12,8 @@ class About_Page extends StatelessWidget {
     // var tinggi = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          // backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
-          backgroundColor: Color.fromRGBO(76, 83, 114, 1),
+          backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+          // backgroundColor: Color.fromRGBO(76, 83, 114, 1),
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +45,7 @@ class About_Page extends StatelessWidget {
                   width: lebar,
                   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   decoration: ShapeDecoration(
-                    color: Color.fromRGBO(76, 83, 114, 1),
+                    color: Color.fromRGBO(148, 154, 177, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
@@ -83,8 +85,8 @@ class About_Page extends StatelessWidget {
                   width: lebar,
                   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   decoration: ShapeDecoration(
-                    // color: Provider.of<ThemeModeData>(context).container2Color,
-                    color: Color.fromRGBO(148, 154, 177, 1),
+                    color: Provider.of<ThemeModeData>(context).container2Color,
+                    // color: Color.fromRGBO(148, 154, 177, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(0),
@@ -150,7 +152,7 @@ class About_Page extends StatelessWidget {
                   // height: tinggi,
                   margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
                   decoration: ShapeDecoration(
-                    color: Color.fromRGBO(76, 83, 114, 1),
+                    color: Color.fromRGBO(148, 154, 177, 1),
                     // color: Color.fromRGBO(107, 140, 150, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
