@@ -33,12 +33,11 @@ class Profile extends StatelessWidget {
           Object? usernameData =
               snapshot.data!.data().toString().contains('username')
                   ? snapshot.data!.get('username')
-                  : '...' ;
-                  
-          Object? emailData =
-              snapshot.data!.data().toString().contains('email')
-                  ? snapshot.data!.get('email')
                   : '...';
+
+          Object? emailData = snapshot.data!.data().toString().contains('email')
+              ? snapshot.data!.get('email')
+              : '...';
 
           Object? profileData =
               snapshot.data!.data().toString().contains('profile')
@@ -103,28 +102,32 @@ class Profile extends StatelessWidget {
                                 height: 20,
                               ),
                               profileData.toString() == ''
-                              ? Container(
-                                width: 100,
-                                height: 100,
-                                decoration: ShapeDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage("Assets/profile_default.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(60),
-                                  ),
-                                ),
-                              )
-                              : Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(60),
-                                    image: DecorationImage(
-                                        image: NetworkImage(profileData.toString()),
-                                        fit: BoxFit.cover)),
-                              ),
+                                  ? Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: ShapeDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              "Assets/profile_default.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(60),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(60),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  profileData.toString()),
+                                              fit: BoxFit.cover)),
+                                    ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -186,7 +189,7 @@ class Profile extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => FavoritePage()),
+                                      builder: (context) => MerkPage()),
                                 );
                               },
                               icon: Icon(
@@ -207,7 +210,8 @@ class Profile extends StatelessWidget {
                               onPressed: () {
                                 // Navigator.push(
                                 //   context,
-                                //   MaterialPageRoute(builder: (context) => setting()),
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Settings()),
                                 // );
                               },
                               icon: Icon(
