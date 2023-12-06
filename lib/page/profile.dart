@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/edit_profile.dart';
+import 'package:lienna_bag/page/settings.dart' as app_settings;
 import 'package:lienna_bag/page/favorite_page.dart';
+import 'package:provider/provider.dart';
 
 import 'about_page.dart';
 
@@ -11,6 +14,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeModeData = Provider.of<ThemeModeData>(context);
+
     var lebar = MediaQuery.of(context).size.width;
     var tinggi = MediaQuery.of(context).size.height;
 
@@ -45,10 +50,10 @@ class Profile extends StatelessWidget {
                   : '';
 
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                // backgroundColor: Providser.of<ThemeModeData>(context).containerColor,
-                backgroundColor: Color.fromRGBO(76, 83, 114, 1),
+                backgroundColor:
+                    Provider.of<ThemeModeData>(context).containerColor,
+                // backgroundColor: Color.fromRGBO(76, 83, 114, 1),
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,8 +75,7 @@ class Profile extends StatelessWidget {
                 Container(
                   width: lebar,
                   height: tinggi,
-                  // color: Color.fromARGB(255, 54, 53, 56),
-                  color: Colors.white,
+                  // color: Provider.of<ThemeModeData>(context).containerColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,11 +138,8 @@ class Profile extends StatelessWidget {
                               Text(
                                 usernameData.toString(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                               SizedBox(
                                 height: 5,
@@ -146,11 +147,8 @@ class Profile extends StatelessWidget {
                               Text(
                                 emailData.toString(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ],
                           ),
@@ -177,20 +175,17 @@ class Profile extends StatelessWidget {
                               ),
                               label: Text(
                                 "Edit Profile",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
                             TextButton.icon(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MerkPage()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => FavoritePage()),
+                                // );
                               },
                               icon: Icon(
                                 Icons.favorite_border_rounded,
@@ -199,20 +194,18 @@ class Profile extends StatelessWidget {
                               ),
                               label: Text(
                                 "My Favorite",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
                             TextButton.icon(
                               onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => Settings()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          app_settings.Settings()),
+                                );
                               },
                               icon: Icon(
                                 Icons.settings,
@@ -221,11 +214,8 @@ class Profile extends StatelessWidget {
                               ),
                               label: Text(
                                 "Settings",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
                             TextButton.icon(
@@ -243,11 +233,8 @@ class Profile extends StatelessWidget {
                               ),
                               label: Text(
                                 "About Us",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
                           ],
