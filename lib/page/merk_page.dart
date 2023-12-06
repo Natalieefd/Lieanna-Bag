@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MerkPage extends StatefulWidget {
-  const MerkPage({super.key});
+  final String merkName;
+  const MerkPage({super.key, required this.merkName});
 
   @override
   State<MerkPage> createState() => _MerkPageState();
@@ -15,7 +16,7 @@ class _MerkPageState extends State<MerkPage> {
     super.initState();
   }
 
-  List _allResults = [];
+  List<dynamic> _allResults = [];
 
   void getClientStream() async {
     var data = await FirebaseFirestore.instance
@@ -40,6 +41,10 @@ class _MerkPageState extends State<MerkPage> {
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
+    final item = _allResults.where((bag) {
+      final name = bag['merk'].toString().toLowerCase();
+      return name.contains(widget.merkName.toLowerCase());
+    }).toList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -49,10 +54,11 @@ class _MerkPageState extends State<MerkPage> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          'MERK A',
+        title: Text(
+          widget.merkName,
+          // 'MERK A',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 24,
             fontFamily: 'Inter',
@@ -62,36 +68,68 @@ class _MerkPageState extends State<MerkPage> {
         ),
         centerTitle: true,
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: orientation == Orientation.portrait ? 2 : 3, 
-          crossAxisSpacing: 20.0, 
-          mainAxisSpacing: 20.0, 
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(119, 133, 99, 99),
         ),
-        itemCount: _allResults.length,
-        padding: const EdgeInsets.all(20),
-        itemBuilder: (context, index) {
-          final item = _allResults[index];
-          return Column(
-            children: <Widget>[
-              Container(
-                width: 111,
-                height: 124,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFFD9D9D9),
-                  image: DecorationImage(
-                    image: NetworkImage(item['gambar']),
-                    repeat: ImageRepeat.repeat
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+        child: Stack(
+          children: <Widget> [
+            Positioned(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 125,
+              child: Center(
+                child: Text(
+                  "Lieanna\nBag",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.30000001192092896),
+                    fontSize: 48,
+                    fontFamily: 'La Belle Aurore',
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
-              Expanded(child: Text(getFirstSentence(item['nama'].toUpperCase())))
-            ],
-          );
-        },
+            ),
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+                crossAxisSpacing: 20.0,
+                mainAxisSpacing: 20.0,
+              ),
+              padding: const EdgeInsets.all(20),
+              itemCount: item.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: <Widget>[
+                    Container(
+                      width: 111,
+                      height: 124,
+                      decoration: ShapeDecoration(
+                        color: const Color(0xFFD9D9D9),
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(item[index]['gambar']),
+                            repeat: ImageRepeat.noRepeat
+                          ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        getFirstSentence(item[index]['nama'].toUpperCase()), 
+                        style: const TextStyle(
+                          color: Colors.white70
+                        ),
+                      )
+                    )
+                  ],
+                );
+              },
+            ),
+          ]
+        ),
       ),
     );
   }
