@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
+import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {
   // final String itemId;
-  const FavoritePage({super.key,
-  // required this.itemId
+  const FavoritePage({
+    super.key,
+    // required this.itemId
   });
 
   @override
@@ -46,31 +49,19 @@ class _FavoritePageState extends State<FavoritePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF9D8D8D),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text(
+        backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        title: Text(
           'FAVORITE',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w600,
-            height: 0,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: orientation == Orientation.portrait ? 2 : 3, 
-          crossAxisSpacing: 20.0, 
-          mainAxisSpacing: 20.0, 
+          crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+          crossAxisSpacing: 20.0,
+          mainAxisSpacing: 20.0,
         ),
         itemCount: _allResults.length,
         padding: const EdgeInsets.all(20),
@@ -84,15 +75,15 @@ class _FavoritePageState extends State<FavoritePage> {
                 decoration: ShapeDecoration(
                   color: const Color(0xFFD9D9D9),
                   image: DecorationImage(
-                    image: NetworkImage(item['gambar']),
-                    repeat: ImageRepeat.repeat
-                  ),
+                      image: NetworkImage(item['gambar']),
+                      repeat: ImageRepeat.repeat),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
-              Expanded(child: Text(getFirstSentence(item['nama'].toUpperCase())))
+              Expanded(
+                  child: Text(getFirstSentence(item['nama'].toUpperCase())))
             ],
           );
         },

@@ -70,7 +70,12 @@ class MyApp extends StatelessWidget {
           headlineMedium: TextStyle(
             fontSize: 20,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
+          ),
+          headlineSmall: TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),
@@ -92,7 +97,12 @@ class MyApp extends StatelessWidget {
           headlineMedium: TextStyle(
             fontSize: 20,
             color: const Color.fromARGB(255, 255, 255, 255),
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
+          ),
+          headlineSmall: TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),

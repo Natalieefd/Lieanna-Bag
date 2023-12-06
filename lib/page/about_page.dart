@@ -12,24 +12,14 @@ class About_Page extends StatelessWidget {
     // var tinggi = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
-          // backgroundColor: Color.fromRGBO(76, 83, 114, 1),
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'ABOUT US',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          )),
+        backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        title: Text(
+          'ABOUT',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,20 +51,12 @@ class About_Page extends StatelessWidget {
                       children: [
                         Text(
                           'Lieanna Bag',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         SizedBox(height: 10),
                         Text(
                           'Lieanna Bag adalah aplikasi yang dapat memberikan Anda rekomendasi produk tas berkualitas yang sesuai dengan style. Dengan fitur rekomendasi yang mudah dan cerdas, Lieanna Bag akan selalu membuat penampilan Anda tampil sempurna!.',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                           textAlign: TextAlign.justify,
                         ),
                       ],
@@ -101,47 +83,27 @@ class About_Page extends StatelessWidget {
                       children: [
                         Text(
                           'Founder',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Andi Nur Fadilah',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Natalie Fuad',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Rizki Agung Romadhon',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Sherina Laraswati',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
                     ),
@@ -169,20 +131,12 @@ class About_Page extends StatelessWidget {
                       children: [
                         Text(
                           'Official Account',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         SizedBox(height: 5),
                         Text(
                           'Instagram : @lieanna_bag',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
                     ),

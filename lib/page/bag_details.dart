@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/search_page.dart';
+import 'package:provider/provider.dart';
 
 class BagDetails extends StatefulWidget {
   final String itemId;
@@ -33,10 +35,10 @@ class _BagDetailsState extends State<BagDetails> {
   String itemDescription = '';
   int itemPrice = 0;
   String itemType = '';
-  
 
   Future<void> fetchData(String itemId) async {
-    var document = await FirebaseFirestore.instance.collection('tas').doc(itemId).get();
+    var document =
+        await FirebaseFirestore.instance.collection('tas').doc(itemId).get();
 
     var desain = await FirebaseFirestore.instance
         .collection('tas')
@@ -55,13 +57,15 @@ class _BagDetailsState extends State<BagDetails> {
     });
   }
 
-  Future<void> addFavorite(String idTas) async{
+  Future<void> addFavorite(String idTas) async {
     var userID = FirebaseAuth.instance.currentUser!.uid;
     var userCollection = await FirebaseFirestore.instance.collection('user');
 
-    userCollection.doc(userID).collection('favorite').doc().set({
-      'id tas' : idTas
-    });
+    userCollection
+        .doc(userID)
+        .collection('favorite')
+        .doc()
+        .set({'id tas': idTas});
   }
 
   @override
@@ -70,25 +74,14 @@ class _BagDetailsState extends State<BagDetails> {
     var tinggi = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          // backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
-          backgroundColor: const Color.fromRGBO(76, 83, 114, 1),
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                widget.itemId,
-                // 'HEYLOOK BACKPACK KIERRA',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          )),
+        backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        title: Text(
+          widget.itemId,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
           Column(
@@ -109,12 +102,8 @@ class _BagDetailsState extends State<BagDetails> {
                     alignment: AlignmentDirectional.center,
                     decoration: ShapeDecoration(
                       image: DecorationImage(
-                        image: 
-                        AssetImage(
-                          colorMap[selectedColor]!
-                        ),
+                        image: AssetImage(colorMap[selectedColor]!),
                         fit: BoxFit.contain,
-
                       ),
                       color: Colors.white,
                       shape: const RoundedRectangleBorder(

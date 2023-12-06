@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/edit_profile.dart';
+import 'package:lienna_bag/page/favorite_page.dart';
 import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:lienna_bag/page/settings.dart' as app_settings;
@@ -53,25 +54,15 @@ class Profile extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-                backgroundColor:
-                    Provider.of<ThemeModeData>(context).containerColor,
-                // backgroundColor: Color.fromRGBO(76, 83, 114, 1),
-                title: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'USER PROFILE',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                )),
+              backgroundColor:
+                  Provider.of<ThemeModeData>(context).containerColor,
+              title: Text(
+                'PROFILE',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              centerTitle: true,
+            ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: 0,
               onTap: (index) {
@@ -240,11 +231,11 @@ class Profile extends StatelessWidget {
                             ),
                             TextButton.icon(
                               onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => FavoritePage()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FavoritePage()),
+                                );
                               },
                               icon: Icon(
                                 Icons.favorite_border_rounded,

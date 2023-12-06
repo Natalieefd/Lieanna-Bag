@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/bag_details.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -14,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   bool isSnackBarDisplay = false;
   String searchTas = '';
   List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
-  
+
   @override
   void initState() {
     _initData();
@@ -74,17 +76,11 @@ class _SearchPageState extends State<SearchPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF9D8D8D),
-        title: const Text(
+        backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        title: Text(
           'SEARCH',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w600,
-            height: 0,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
       ),
@@ -163,13 +159,15 @@ class _SearchPageState extends State<SearchPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (item) => BagDetails(itemId: filteredBags[index].id),
+                                builder: (item) =>
+                                    BagDetails(itemId: filteredBags[index].id),
                               ));
                         },
                         leading: CircleAvatar(
                             radius: 30,
                             backgroundColor: Colors.white,
-                            backgroundImage: NetworkImage(filteredBags[index]['gambar'])),
+                            backgroundImage:
+                                NetworkImage(filteredBags[index]['gambar'])),
                         title: Text(
                           filteredBags[index]['nama'],
                           style: const TextStyle(fontSize: 16),
