@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/page/search_page.dart';
 
@@ -32,6 +33,7 @@ class _BagDetailsState extends State<BagDetails> {
   String itemDescription = '';
   int itemPrice = 0;
   String itemType = '';
+  
 
   Future<void> fetchData(String itemId) async {
     var document = await FirebaseFirestore.instance.collection('tas').doc(itemId).get();
@@ -50,6 +52,15 @@ class _BagDetailsState extends State<BagDetails> {
       itemDescription = document['deskripsi'];
       itemPrice = document['harga'];
       itemType = document['jenis'];
+    });
+  }
+
+  Future<void> addFavorite(String idTas) async{
+    var userID = FirebaseAuth.instance.currentUser!.uid;
+    var userCollection = await FirebaseFirestore.instance.collection('user');
+
+    userCollection.doc(userID).collection('favorite').doc().set({
+      'id tas' : idTas
     });
   }
 
@@ -195,7 +206,9 @@ class _BagDetailsState extends State<BagDetails> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            addFavorite(widget.itemId);
+                          },
                           icon: const Icon(
                             Icons.favorite_sharp,
                           ),
