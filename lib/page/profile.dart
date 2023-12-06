@@ -7,7 +7,6 @@ import 'package:lienna_bag/page/edit_profile.dart';
 import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:lienna_bag/page/settings.dart' as app_settings;
-import 'package:lienna_bag/page/favorite_page.dart';
 import 'package:provider/provider.dart';
 
 import 'about_page.dart';

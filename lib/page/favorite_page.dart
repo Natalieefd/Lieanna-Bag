@@ -1,14 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MerkPage extends StatefulWidget {
-  const MerkPage({super.key});
+class FavoritePage extends StatefulWidget {
+  // final String itemId;
+  const FavoritePage({super.key,
+  // required this.itemId
+  });
 
   @override
-  State<MerkPage> createState() => _MerkPageState();
+  State<FavoritePage> createState() => _FavoritePageState();
 }
 
-class _MerkPageState extends State<MerkPage> {
+class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
     getClientStream();
@@ -47,7 +50,7 @@ class _MerkPageState extends State<MerkPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
-            Navigator.pushNamed(context, '/searchPage');
+            Navigator.pop(context);
           },
         ),
         title: const Text(
