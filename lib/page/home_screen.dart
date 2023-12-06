@@ -78,8 +78,19 @@ class _hom_scrnState extends State<hom_scrn> {
                                 fit: BoxFit.cover)),
                       ),
                     ),
-              title: Text('Welcome, $usernameData',
-                  style: Theme.of(context).textTheme.headlineMedium),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Welcome, $usernameData',
+                      style: Theme.of(context).textTheme.headlineMedium),
+                  Icon(
+                    CupertinoIcons.square_arrow_right,
+                    color: Color.fromRGBO(76, 83, 114, 1),
+                    size: 30,
+                  ),
+                ],
+              ),
             ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor:
