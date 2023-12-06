@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: size.width - 50,
                     child: CupertinoButton.filled(
-                      child: const Text("login"),
+                      child: const Text("Login"),
                       onPressed: () {
                         setState(() {
                           form = !form;
@@ -268,7 +268,9 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: const BorderRadius.all(Radius.circular(40)),
                   child: const Text("Submit"),
                   onPressed: () async {
-                    if (emailCheck == true && emailVal == true && passwordVal == true) {
+                    if (emailCheck == true &&
+                        emailVal == true &&
+                        passwordVal == true) {
                       try {
                         final email = _emailController.value.text;
                         final password = _passwordController.value.text;
@@ -286,11 +288,9 @@ class _LoginPageState extends State<LoginPage> {
                             builder: (context) => const hom_scrn(),
                           ),
                         );
-
                       } catch (e) {
                         print(e);
                       }
-
                     } else {
                       alert(context, "Waring",
                           "Mohon lengkapi data login terlebih dahulu!");
