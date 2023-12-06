@@ -95,14 +95,6 @@ class _SearchPageState extends State<SearchPage> {
             end: Alignment(-0.28, 0.96),
             colors: [Color(0xFF9D8D8D), Color(0x779E6E6E)],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-              spreadRadius: 0,
-            )
-          ],
         ),
         child: Stack(
           children: <Widget>[
@@ -184,7 +176,7 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         subtitle: Text(filteredBags[index]['jenis']),
                         trailing: Text(CurrencyFormat.convertToIdr(
-                            filteredBags[index]['harga'], 0)),
+                            filteredBags[index]['harga'], 2)),
                       );
                     },
                   ),
@@ -202,7 +194,7 @@ class CurrencyFormat {
   static String convertToIdr(dynamic number, int decimalDigit) {
     NumberFormat currencyFormatter = NumberFormat.currency(
       locale: 'id',
-      symbol: 'Rp ',
+      symbol: 'Rp',
       decimalDigits: decimalDigit,
     );
     return currencyFormatter.format(number);
