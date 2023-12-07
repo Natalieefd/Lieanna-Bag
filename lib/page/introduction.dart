@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:provider/provider.dart';
 
 class introduction extends StatelessWidget {
   const introduction({super.key});
@@ -10,6 +12,8 @@ class introduction extends StatelessWidget {
     return IntroductionScreen(
       next: Text("Next"),
       done: Text("Done"),
+
+
       onDone: () {
         Navigator.of(context).pop();
 
@@ -33,10 +37,10 @@ class introduction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 140),
+                padding: const EdgeInsets.only(top: 100),
                 child: Container(
                   width: 200,
-                  height: 160,
+                  height: 200,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("Assets/logo.png"),
@@ -59,10 +63,10 @@ class introduction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 140),
+                padding: const EdgeInsets.only(top: 100),
                 child: Container(
                   width: 200,
-                  height: 160,
+                  height: 190,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("Assets/gambar2.png"),

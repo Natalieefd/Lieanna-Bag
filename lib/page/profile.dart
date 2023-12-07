@@ -99,9 +99,8 @@ class Profile extends StatelessWidget {
                   );
                 }
               },
-              
-              selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
-              unselectedItemColor: Color.fromRGBO(10, 10, 11, 1),
+              selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
+              unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               items: [
                 BottomNavigationBarItem(
                   label: "Home",

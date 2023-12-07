@@ -166,8 +166,8 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
               },
-              selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
-              unselectedItemColor: Color.fromRGBO(10, 10, 11, 1),
+              selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
+              unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               items: [
                 BottomNavigationBarItem(
                   label: "Home",
@@ -209,9 +209,9 @@ class _hom_scrnState extends State<hom_scrn> {
                       child: Row(
                         children: [
                           GestureDetector(
-                            onTap: () {
+                              onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: 'Zalora'),
+                                builder: (context) => SearchPage(),
                               ));
                             },
                             child: Padding(
@@ -234,11 +234,11 @@ class _hom_scrnState extends State<hom_scrn> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: 'Kanken'),
-                              ));
-                            },
+                            // onTap: () {
+                            //   Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => MerkPage(merkName: "Kanken",),
+                            //   ));
+                            // },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40, left: 30),
                               child: Hero(
@@ -261,7 +261,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: 'h&m'),
+                                builder: (context) => SearchPage(),
                               ));
                             },
                             child: Padding(
@@ -389,7 +389,7 @@ class _hom_scrnState extends State<hom_scrn> {
                               left: MediaQuery.of(context).size.width * 0.25,
                               top: 5),
                           child: Text(
-                            "Zalora",
+                            "Mango",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
@@ -447,19 +447,19 @@ class _hom_scrnState extends State<hom_scrn> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.15,
+                              left: MediaQuery.of(context).size.width * 0.06,
                               top: 5),
                           child: Text(
-                            "Hand Bag",
+                            "Sadie Mini HandBag",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.32,
+                              left: MediaQuery.of(context).size.width * 0.13,
                               top: 5),
                           child: Text(
-                            "Backpack",
+                            "Packable Outdoor ",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
