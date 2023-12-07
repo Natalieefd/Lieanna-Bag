@@ -249,7 +249,8 @@ class Profile extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headlineMedium,
+                                          .headlineMedium
+                                          ?.copyWith(color: Colors.white),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -259,7 +260,8 @@ class Profile extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headlineMedium,
+                                          .headlineMedium
+                                          ?.copyWith(color: Colors.white),
                                     ),
                                   ],
                                 ),
