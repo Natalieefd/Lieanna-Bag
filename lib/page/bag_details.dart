@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/search_page.dart';
@@ -59,23 +60,25 @@ class _BagDetailsState extends State<BagDetails> {
       itemPrice = document['harga'];
       itemType = document['jenis'];
 
-      colorMap.addAll({itemWarna:itemImage});
+      colorMap.addAll({itemWarna: itemImage});
     });
   }
 
-  Future<void> addFavorite(String idTas, String nama, String gambar) async{
+  Future<void> addFavorite(String idTas, String nama, String gambar) async {
     var userID = FirebaseAuth.instance.currentUser!.uid;
     var userCollection = await FirebaseFirestore.instance.collection('user');
 
-    userCollection.doc(userID).collection('favorite').doc(idTas).set({
-      'id tas' : idTas,
-      'gambar' : gambar,
-      'nama' : nama
-    });
+    userCollection
+        .doc(userID)
+        .collection('favorite')
+        .doc(idTas)
+        .set({'id tas': idTas, 'gambar': gambar, 'nama': nama});
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeModeData = Provider.of<ThemeModeData>(context);
+    var size = MediaQuery.of(context).size;
     var lebar = MediaQuery.of(context).size.width;
     var tinggi = MediaQuery.of(context).size.height;
 
@@ -92,7 +95,7 @@ class _BagDetailsState extends State<BagDetails> {
         title: Text(
           "BAG DETAIL",
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
       ),
@@ -130,13 +133,13 @@ class _BagDetailsState extends State<BagDetails> {
             ],
           ),
           Positioned(
-            top: 220,
+            top: 180,
             child: Container(
               width: lebar,
               height: tinggi - 310,
-              decoration: const ShapeDecoration(
-                // color: Provider.of<ThemeModeData>(context).containerColor,
-                color: Color.fromRGBO(76, 83, 114, 1),
+              decoration: ShapeDecoration(
+                color: Provider.of<ThemeModeData>(context).containerColor,
+                // color: Color.fromRGBO(76, 83, 114, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
@@ -161,16 +164,10 @@ class _BagDetailsState extends State<BagDetails> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      itemDescription,
-                      // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
+                    Text(itemDescription,
+                        // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: 10),
                   ],
                 ),
@@ -178,13 +175,13 @@ class _BagDetailsState extends State<BagDetails> {
             ),
           ),
           Positioned(
-            top: tinggi - 370,
+            top: tinggi - 410,
             child: Container(
               width: lebar,
               height: tinggi - 300,
-              decoration: const ShapeDecoration(
-                // color: Provider.of<ThemeModeData>(context).container2Color,
-                color: Color.fromRGBO(148, 154, 177, 1),
+              decoration: ShapeDecoration(
+                color: Provider.of<ThemeModeData>(context).container2Color,
+                // color: Color.fromRGBO(148, 154, 177, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
@@ -208,14 +205,6 @@ class _BagDetailsState extends State<BagDetails> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            addFavorite(widget.itemId, itemName, itemImage);
-                          },
-                          icon: const Icon(
-                            Icons.favorite_sharp,
-                          ),
-                        )
                       ],
                     ),
                     ButtonSegment(
@@ -228,7 +217,7 @@ class _BagDetailsState extends State<BagDetails> {
                       },
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       'Harga',
                       style: TextStyle(
                         color: Colors.black,
@@ -265,6 +254,33 @@ class _BagDetailsState extends State<BagDetails> {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
+                        width: size.width - 50,
+                        child: CupertinoButton(
+                          color: Provider.of<ThemeModeData>(context)
+                              .containerColor,
+                          child: Text("Tambahkan ke Favorite",
+                              style: Theme.of(context).textTheme.headlineSmall),
+                          onPressed: () {
+                            addFavorite(widget.itemId, itemName, itemImage);
+                          },
+                        ),
+                      ),
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10.0),
+                    //   child: CupertinoButton(
+                    //     color:
+                    //         Provider.of<ThemeModeData>(context).containerColor,
+                    //     child: Text("Tambahkan ke Favorite",
+                    //         style: Theme.of(context).textTheme.headlineSmall),
+                    //     onPressed: () {
+                    //       addFavorite(widget.itemId, itemName, itemImage);
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
