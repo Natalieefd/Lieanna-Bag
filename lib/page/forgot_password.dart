@@ -120,35 +120,40 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey),
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade200,
-                          width: 0,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            10,
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Provider.of<ThemeModeData>(context)
+                                .container2Color,
+                            width: 0,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              10,
+                            ),
                           ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            10,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Provider.of<ThemeModeData>(context)
+                                  .container2Color,
+                              width: 2.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              10,
+                            ),
                           ),
                         ),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      hintText: 'Email Address',
-                      hintStyle: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                    ),
+                        filled: true,
+                        fillColor:
+                            Provider.of<ThemeModeData>(context).container2Color,
+                        hintText: 'Email Address',
+                        hintStyle: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(color: Colors.black)),
                   ),
                 ),
               ],
@@ -179,13 +184,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 }
               }
             },
-            child: Text(
-              'Reset Password',
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
+            child: Text('Reset Password',
+                style: Theme.of(context).textTheme.headlineSmall),
           ),
         ),
       ),
