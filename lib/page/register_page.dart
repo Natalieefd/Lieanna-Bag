@@ -5,8 +5,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/auth.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -204,19 +206,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: SizedBox(
                   child: TextFormField(
                     controller: _emailController,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade200,
+                      fillColor:
+                          Provider.of<ThemeModeData>(context).container2Color,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
+                            width: 0),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
                             width: 1.7),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Email",
@@ -236,19 +243,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: SizedBox(
                   child: TextFormField(
                     controller: _passwordController,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade200,
+                      fillColor:
+                          Provider.of<ThemeModeData>(context).container2Color,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
+                            width: 0),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
                             width: 1.7),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -273,19 +285,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: SizedBox(
                   child: TextFormField(
                     controller: _confPasswordController,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey.shade200,
+                      fillColor:
+                          Provider.of<ThemeModeData>(context).container2Color,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
+                            width: 0),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Provider.of<ThemeModeData>(context)
+                                .containerColor,
                             width: 1.7),
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -352,17 +369,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               "Confirmasi Password harus sama!");
 
                       if (
-                        // usernameVal == true &&
+                          // usernameVal == true &&
                           emailVal == true &&
-                          passwordVal == true &&
-                          confPass == true &&
-                          checkVal == true) {
+                              passwordVal == true &&
+                              confPass == true &&
+                              checkVal == true) {
                         try {
                           setState(() => loading = true);
 
                           //membuat akun baru
                           await Auth().register(email, password);
-                          
+
                           //input data user ke firestore
                           // addUser(email, password);
 
@@ -374,7 +391,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               builder: (context) => const LoginPage(),
                             ),
                           );
-
                         } catch (e) {
                           alert(context, 'Warning', e.toString());
                         }
