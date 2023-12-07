@@ -14,24 +14,11 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
-    getClientStream();
     getFavorite();
     super.initState();
   }
 
-  List _allResults = [];
   List favoriteID = [];
-
-  void getClientStream() async {
-    var data = await FirebaseFirestore.instance
-        .collection('tas')
-        .orderBy('nama')
-        .get();
-
-    setState(() {
-      _allResults = data.docs;
-    });
-  }
 
   String getFirstSentence(String text) {
     List<String> sentences = text.split(RegExp(r'[.!? ]'));
