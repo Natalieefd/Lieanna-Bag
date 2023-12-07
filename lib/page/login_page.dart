@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/auth.dart';
 import 'package:lienna_bag/page/forgot_password.dart';
+import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/register_page.dart';
 import 'package:provider/provider.dart';
 
@@ -303,6 +304,14 @@ class _LoginPageState extends State<LoginPage> {
 
                         //login akun
                         await Auth().signIn(email, password);
+                        
+                        setState(() => loading = false);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ));
 
                       } catch (e) {
                         alert(context, 'Warning', e.toString());
