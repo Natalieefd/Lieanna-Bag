@@ -27,9 +27,9 @@ class ThemeModeData extends ChangeNotifier {
       case 0:
         return Color.fromRGBO(124, 126, 157, 1);
       case 1:
-        return Color.fromRGBO(234, 198, 150, 1);
+        return Color.fromRGBO(255, 245, 194, 1);
       case 2:
-        return Color.fromRGBO(255, 220, 220, 1);
+        return Color.fromRGBO(253, 240, 240, 1);
       case 3:
         return Color.fromRGBO(219, 223, 234, 1);
       default:
