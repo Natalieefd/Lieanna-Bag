@@ -1,13 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
-import 'package:lienna_bag/auth.dart';
 import 'package:lienna_bag/page/forgot_password.dart';
 import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/register_page.dart';
@@ -72,6 +68,41 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
     );
+  }
+
+  Future<void> signIn(String email, String password) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var user = FirebaseAuth.instance.currentUser;
+    try {
+      // This will Log in the existing user in our firebase
+      var signIn = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+      .then((value) => print("User Loged"))
+      .catchError((error) => print("Failed to Login: $error"));
+
+      print(user);
+
+      if(user != null){
+        print("home");
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+      }
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+
+      } else if (e.code == 'invalid-email'){
+        print('Wrong email provided for that user.');
+
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -303,14 +334,14 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() => loading = true);
 
                         //login akun
-                        await Auth().signIn(email, password);
+                        await signIn(email, password);
 
                         setState(() => loading = false);
 
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const hom_scrn(),
+                            builder: (context) => const HomePage(),
                           ),
                         );
                       } catch (e) {

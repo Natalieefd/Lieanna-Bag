@@ -7,10 +7,9 @@ class Auth {
   //Creating new instance of firebase auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
   
-  Future<void> register(
-      String email, String password) async {
-        
+  Future<void> register(String email, String password) async {
     String username = List.generate(6, (index) => Random().nextInt(10)).join();
+    
     try {
       // This will create a new user in our firebase
       final newUser = await _auth.createUserWithEmailAndPassword(
@@ -42,22 +41,4 @@ class Auth {
     }
   }
 
-  Future<void> signIn(String email, String password) async {
-    try {
-      // This will Log in the existing user in our firebase
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 }
