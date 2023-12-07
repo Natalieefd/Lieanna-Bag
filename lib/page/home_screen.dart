@@ -273,6 +273,8 @@ class _hom_scrnState extends State<hom_scrn> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.13,
                                   decoration: BoxDecoration(
+                                    
+                                         color: Colors.white,
                                       borderRadius: BorderRadius.circular(5),
                                       image: DecorationImage(
                                           image: AssetImage("Assets/h&m.png"),
@@ -343,8 +345,8 @@ class _hom_scrnState extends State<hom_scrn> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/tas1.jpg"),
-                                        fit: BoxFit.cover)),
+                                        image: AssetImage("Assets/kanken weekender.webp"),
+                                        fit: BoxFit.contain)),
                               ),
                             ),
                           ),
@@ -357,17 +359,18 @@ class _hom_scrnState extends State<hom_scrn> {
                             ));
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 25, left: 45),
+                            padding: const EdgeInsets.only(top: 25, left: 40),
                             child: Hero(
                               tag: "top2",
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height: 150,
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/tas2.jpg"),
-                                        fit: BoxFit.cover)),
+                                        image: AssetImage("Assets/mango-7355-4887514-1.webp"),
+                                        fit: BoxFit.contain)),
                               ),
                             ),
                           ),
@@ -387,7 +390,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.25,
+                              left: MediaQuery.of(context).size.width * 0.23,
                               top: 5),
                           child: Text(
                             "Mango",
@@ -413,6 +416,7 @@ class _hom_scrnState extends State<hom_scrn> {
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height: 150,
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
                                         image: AssetImage("Assets/Sadie_Mini_HandBag_Chalk.png"),
@@ -438,7 +442,7 @@ class _hom_scrnState extends State<hom_scrn> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/tas4.jpg"),
+                                        image: AssetImage("Assets/bbf92fcc1128253b30fca78cf9a39faabd1ac92c_xxl-1.jpg"),
                                         fit: BoxFit.cover)),
                               ),
                             ),
@@ -450,7 +454,7 @@ class _hom_scrnState extends State<hom_scrn> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.06,
+                              left: MediaQuery.of(context).size.width * 0.04,
                               top: 5),
                           child: Text(
                             "Sadie Mini HandBag",
@@ -459,7 +463,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.13,
+                              left: MediaQuery.of(context).size.width * 0.11,
                               top: 5),
                           child: Text(
                             "Packable Outdoor ",
