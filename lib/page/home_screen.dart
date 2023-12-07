@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/bag_details.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:lienna_bag/page/merk_page.dart';
 import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:provider/provider.dart';
@@ -119,10 +120,13 @@ class _hom_scrnState extends State<hom_scrn> {
                           builder: (context) => const LoginPage()),
                     );
                   },
-                  child: Icon(
-                    CupertinoIcons.square_arrow_right,
-                    color: Theme.of(context).colorScheme.onBackground,
-                    size: 30,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Icon(
+                      CupertinoIcons.square_arrow_right,
+                      color: Theme.of(context).colorScheme.onBackground,
+                      size: 30,
+                    ),
                   ),
                 ),
               ],
@@ -206,7 +210,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SearchPage(),
+                                builder: (context) => MerkPage(merkName: "Zalora",),
                               ));
                             },
                             child: Padding(
@@ -229,11 +233,11 @@ class _hom_scrnState extends State<hom_scrn> {
                             ),
                           ),
                           GestureDetector(
-                            // onTap: () {
-                            //   Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => MerkPage(merkName: "Kanken",),
-                            //   ));
-                            // },
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MerkPage(merkName: "Kanken",),
+                              ));
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40, left: 30),
                               child: Hero(
@@ -256,7 +260,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SearchPage(),
+                                builder: (context) => MerkPage(merkName: "h&m",),
                               ));
                             },
                             child: Padding(
