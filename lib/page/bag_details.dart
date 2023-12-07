@@ -77,17 +77,9 @@ class _BagDetailsState extends State<BagDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final themeModeData = Provider.of<ThemeModeData>(context);
     var size = MediaQuery.of(context).size;
     var lebar = MediaQuery.of(context).size.width;
     var tinggi = MediaQuery.of(context).size.height;
-
-    // List<QueryDocumentSnapshot<Map<String, dynamic>>> Color =
-    //     colorItem.where((bag) {
-    //   final name = bag['nama'].toString().toLowerCase();
-    //   return name.contains(searchTas.toLowerCase());
-    // }
-    // ).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -269,22 +261,18 @@ class _BagDetailsState extends State<BagDetails> {
                           ),
                           onPressed: () {
                             addFavorite(widget.itemId, itemName, itemImage);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    "Produk Berhasil Ditambahkan sebagai Favorit!"),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
                           },
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(10.0),
-                    //   child: CupertinoButton(
-                    //     color:
-                    //         Provider.of<ThemeModeData>(context).containerColor,
-                    //     child: Text("Tambahkan ke Favorite",
-                    //         style: Theme.of(context).textTheme.headlineSmall),
-                    //     onPressed: () {
-                    //       addFavorite(widget.itemId, itemName, itemImage);
-                    //     },
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

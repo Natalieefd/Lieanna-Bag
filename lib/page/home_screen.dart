@@ -210,7 +210,9 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: "Zalora",),
+                                builder: (context) => MerkPage(
+                                  merkName: "Zalora",
+                                ),
                               ));
                             },
                             child: Padding(
@@ -235,7 +237,9 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: "Kanken",),
+                                builder: (context) => MerkPage(
+                                  merkName: "Kanken",
+                                ),
                               ));
                             },
                             child: Padding(
@@ -260,7 +264,9 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerkPage(merkName: "h&m",),
+                                builder: (context) => MerkPage(
+                                  merkName: "h&m",
+                                ),
                               ));
                             },
                             child: Padding(
@@ -273,8 +279,7 @@ class _hom_scrnState extends State<hom_scrn> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.13,
                                   decoration: BoxDecoration(
-                                    
-                                         color: Colors.white,
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(5),
                                       image: DecorationImage(
                                           image: AssetImage("Assets/h&m.png"),
@@ -345,7 +350,8 @@ class _hom_scrnState extends State<hom_scrn> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/kanken weekender.webp"),
+                                        image: AssetImage(
+                                            "Assets/kanken weekender.webp"),
                                         fit: BoxFit.contain)),
                               ),
                             ),
@@ -366,10 +372,11 @@ class _hom_scrnState extends State<hom_scrn> {
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height: 150,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/mango-7355-4887514-1.webp"),
+                                        image: AssetImage(
+                                            "Assets/mango-7355-4887514-1.webp"),
                                         fit: BoxFit.contain)),
                               ),
                             ),
@@ -416,10 +423,11 @@ class _hom_scrnState extends State<hom_scrn> {
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height: 150,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/Sadie_Mini_HandBag_Chalk.png"),
+                                        image: AssetImage(
+                                            "Assets/Sadie_Mini_HandBag_Chalk.png"),
                                         fit: BoxFit.cover)),
                               ),
                             ),
@@ -442,7 +450,8 @@ class _hom_scrnState extends State<hom_scrn> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/bbf92fcc1128253b30fca78cf9a39faabd1ac92c_xxl-1.jpg"),
+                                        image: AssetImage(
+                                            "Assets/bbf92fcc1128253b30fca78cf9a39faabd1ac92c_xxl-1.jpg"),
                                         fit: BoxFit.cover)),
                               ),
                             ),
@@ -472,6 +481,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 35),
                   ],
                 ),
               ],
