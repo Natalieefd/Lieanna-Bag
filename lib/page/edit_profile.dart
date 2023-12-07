@@ -205,12 +205,16 @@ class _EditProfileState extends State<EditProfile> {
                     child: SizedBox(
                       child: TextFormField(
                         controller: _usernameController,
+                        style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.grey.shade100,
+                            fillColor: Provider.of<ThemeModeData>(context)
+                                .container2Color,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey.shade200, width: 0),
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
+                                  width: 0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
@@ -224,7 +228,10 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                             contentPadding: const EdgeInsets.only(left: 10),
                             hintText: "Username",
-                            hintStyle: Theme.of(context).textTheme.bodySmall),
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.black)),
                       ),
                     ),
                   ),
