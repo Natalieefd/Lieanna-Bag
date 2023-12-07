@@ -238,9 +238,11 @@ class _EditProfileState extends State<EditProfile> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 120, bottom: 30, left: 35, right: 35),
-                    child: CupertinoButton.filled(
+                    child: CupertinoButton(
+                      color: Provider.of<ThemeModeData>(context).containerColor,
                       borderRadius: const BorderRadius.all(Radius.circular(40)),
-                      child: const Text("Edit Profile"),
+                      child: Text("Edit Profile",
+                          style: Theme.of(context).textTheme.headlineSmall),
                       onPressed: () async {
                         final username = _usernameController.value.text;
 

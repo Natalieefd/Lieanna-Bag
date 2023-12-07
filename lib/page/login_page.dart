@@ -116,8 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(top: 70, left: 35, right: 35),
                   child: SizedBox(
                     width: size.width - 50,
-                    child: CupertinoButton.filled(
-                      child: const Text("Login"),
+                    child: CupertinoButton(
+                      color: Provider.of<ThemeModeData>(context).containerColor,
+                      child: Text("Login",
+                          style: Theme.of(context).textTheme.headlineSmall),
                       onPressed: () {
                         setState(() {
                           form = !form;
@@ -285,9 +287,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 60, left: 30, right: 30),
-                child: CupertinoButton.filled(
+                child: CupertinoButton(
+                  color: Provider.of<ThemeModeData>(context).containerColor,
                   borderRadius: const BorderRadius.all(Radius.circular(40)),
-                  child: const Text("Submit"),
+                  child: Text("Submit",
+                      style: Theme.of(context).textTheme.headlineSmall),
                   onPressed: () async {
                     if (emailCheck == true &&
                         emailVal == true &&

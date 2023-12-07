@@ -3,9 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/firebase_exception.dart';
 import 'package:lienna_bag/page/home_screen.dart';
-
+import 'package:provider/provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const String id = 'reset_password';
@@ -120,8 +121,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         color: Colors.grey),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20))),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey.shade200,
@@ -134,8 +134,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.white, width: 2.0),
+                        borderSide: BorderSide(color: Colors.white, width: 2.0),
                         borderRadius: BorderRadius.all(
                           Radius.circular(
                             10,
@@ -152,44 +151,44 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
         ),
       ),
       bottomSheet: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
-                    width: size.width-55,
-                    child: CupertinoButton.filled(
-                      borderRadius: const BorderRadius.all(Radius.circular(40)),
-                      onPressed: () async {
-                        if (_key.currentState!.validate()) {
-                          final _status = await resetPassword(
-                              email: _emailController.text.trim());
-                          if (_status == AuthStatus.successful) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const hom_scrn(),
-                              ),
-                            );
-                          } else {
-                            alert(context, "Warning", "Please input your email address");
-                          }
-                        }
-                      },
-                      child: Text(
-                        'Reset Password',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
+        padding: const EdgeInsets.only(bottom: 20),
+        child: SizedBox(
+          width: size.width - 55,
+          child: CupertinoButton(
+            color: Provider.of<ThemeModeData>(context).containerColor,
+            borderRadius: const BorderRadius.all(Radius.circular(40)),
+            onPressed: () async {
+              if (_key.currentState!.validate()) {
+                final _status =
+                    await resetPassword(email: _emailController.text.trim());
+                if (_status == AuthStatus.successful) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const hom_scrn(),
                     ),
-                  ),
-                ),
+                  );
+                } else {
+                  alert(context, "Warning", "Please input your email address");
+                }
+              }
+            },
+            child: Text(
+              'Reset Password',
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -141,8 +141,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.only(top: 70, left: 35, right: 35),
                   child: SizedBox(
                     width: size.width - 50,
-                    child: CupertinoButton.filled(
-                      child: const Text("Register"),
+                    child: CupertinoButton(
+                      color: Provider.of<ThemeModeData>(context).containerColor,
+                      child: Text("Register",
+                          style: Theme.of(context).textTheme.headlineSmall),
                       onPressed: () {
                         setState(() {
                           form = !form;
@@ -366,9 +368,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     top: 30, bottom: 30, left: 85, right: 85),
                 child: SizedBox(
                   width: size.width - 55,
-                  child: CupertinoButton.filled(
+                  child: CupertinoButton(
+                    color: Provider.of<ThemeModeData>(context).containerColor,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
-                    child: const Text("Sign Up"),
+                    child: Text("Sign Up",
+                        style: Theme.of(context).textTheme.headlineSmall),
                     onPressed: () async {
                       // final username = _usernameController.value.text;
                       final email = _emailController.value.text;
