@@ -93,7 +93,10 @@ class _FavoritePageState extends State<FavoritePage> {
         title: Text(
           'FAVORITE',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(color: Colors.black),
         ),
         centerTitle: true,
       ),

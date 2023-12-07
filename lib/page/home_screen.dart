@@ -109,8 +109,13 @@ class _hom_scrnState extends State<hom_scrn> {
                                 fit: BoxFit.cover)),
                       ),
                     ),
-              title: Text('Welcome, $usernameData',
-                  style: Theme.of(context).textTheme.headlineMedium),
+              title: Text(
+                'Welcome, $usernameData',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(color: Colors.black),
+              ),
               actions: [
                 GestureDetector(
                   onTap: () {

@@ -58,10 +58,15 @@ class _MerkPageState extends State<MerkPage> {
             Navigator.pop(context);
           },
         ),
-        title: Text(widget.merkName,
-            // 'MERK A',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineLarge),
+        title: Text(
+          widget.merkName,
+          // 'MERK A',
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(color: Colors.black),
+        ),
         centerTitle: true,
       ),
       body: Container(

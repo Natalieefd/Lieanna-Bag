@@ -50,7 +50,7 @@ class introduction extends StatelessWidget {
         ),
         PageViewModel(
           title: "Category",
-          body: "you can choose a bag for woman or men",
+          body: "You can choose a bag for woman or men",
           decoration: PageDecoration(
             titleTextStyle: Theme.of(context).textTheme.bodyLarge!,
             bodyTextStyle: Theme.of(context).textTheme.titleMedium!,
@@ -75,7 +75,7 @@ class introduction extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: "you want to try?",
+          title: "You want to try?",
           body: "If you want to try, you can register first!",
           decoration: PageDecoration(
             titleTextStyle: Theme.of(context).textTheme.bodyLarge!,

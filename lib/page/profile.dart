@@ -59,7 +59,10 @@ class Profile extends StatelessWidget {
               title: Text(
                 'PROFILE',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge
+                    ?.copyWith(color: Colors.black),
               ),
               centerTitle: true,
             ),

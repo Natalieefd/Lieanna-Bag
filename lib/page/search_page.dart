@@ -83,7 +83,10 @@ class _SearchPageState extends State<SearchPage> {
         title: Text(
           'SEARCH',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(color: Colors.black),
         ),
         centerTitle: true,
       ),
@@ -122,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
             );
           }
         },
-       selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
+        selectedItemColor: Color.fromRGBO(32, 34, 47, 1),
         unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
         items: [
           BottomNavigationBarItem(

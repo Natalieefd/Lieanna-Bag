@@ -115,10 +115,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: TextFormField(
                     obscureText: false,
                     controller: _emailController,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:

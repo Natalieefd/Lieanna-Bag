@@ -127,7 +127,10 @@ class _EditProfileState extends State<EditProfile> {
                 title: Text(
                   'EDIT PROFILE',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineLarge,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge
+                      ?.copyWith(color: Colors.black),
                 ),
                 centerTitle: true,
               ),
