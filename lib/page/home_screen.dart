@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
+import 'package:lienna_bag/page/bag_details.dart';
 import 'package:lienna_bag/page/login_page.dart';
 import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
@@ -129,7 +130,6 @@ class _hom_scrnState extends State<hom_scrn> {
                 }
               },
               selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
-              // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
               items: [
                 BottomNavigationBarItem(
                   label: "Home",
@@ -157,60 +157,7 @@ class _hom_scrnState extends State<hom_scrn> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Row(
-                    //   children: [
-                    // ListTile(
-                    //   tileColor:
-                    //       Provider.of<ThemeModeData>(context).containerColor,
-                    //   leading: profileData.toString() == ''
-                    //       ? Padding(
-                    //           padding: const EdgeInsets.only(
-                    //               left: 10, top: 10, bottom: 10),
-                    //           child: Container(
-                    //             width: 50,
-                    //             height: 60,
-                    //             decoration: BoxDecoration(
-                    //                 borderRadius: BorderRadius.circular(10),
-                    //                 color: Colors.black,
-                    //                 image: DecorationImage(
-                    //                     image: AssetImage(
-                    //                         'Assets/profile_default.png'),
-                    //                     fit: BoxFit.cover)),
-                    //           ),
-                    //         )
-                    //       : Padding(
-                    //           padding: const EdgeInsets.only(
-                    //               left: 10, top: 10, bottom: 10),
-                    //           child: Container(
-                    //             width: 50,
-                    //             height: 60,
-                    //             decoration: BoxDecoration(
-                    //                 borderRadius: BorderRadius.circular(10),
-                    //                 color: Colors.black,
-                    //                 image: DecorationImage(
-                    //                     image: NetworkImage(
-                    //                         profileData.toString()),
-                    //                     fit: BoxFit.cover)),
-                    //           ),
-                    //         ),
-                    //   title: Text('Welcome, $usernameData',
-                    //       style: Theme.of(context).textTheme.headlineMedium),
-                    //   trailing: GestureDetector(
-                    //     onTap: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const LoginPage()),
-                    //       );
-                    //     },
-                    //     child: Icon(
-                    //       CupertinoIcons.square_arrow_right,
-                    //       color: Theme.of(context).colorScheme.onBackground,
-                    //       size: 30,
-                    //     ),
-                    //   ),
-                    // ),
-
+                    
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 200,
@@ -226,7 +173,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => SearchPage(),
                               ));
                             },
                             child: Padding(
@@ -251,7 +198,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => SearchPage(),
                               ));
                             },
                             child: Padding(
@@ -276,7 +223,7 @@ class _hom_scrnState extends State<hom_scrn> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => SearchPage(),
                               ));
                             },
                             child: Padding(
