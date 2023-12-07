@@ -25,7 +25,7 @@ class ThemeModeData extends ChangeNotifier {
   Color get container2Color {
     switch (_selectedColorScheme) {
       case 0:
-        return Color.fromRGBO(124, 126, 157, 1);
+        return Color.fromRGBO(219, 223, 234, 1);
       case 1:
         return Color.fromRGBO(255, 245, 194, 1);
       case 2:
