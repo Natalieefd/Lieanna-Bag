@@ -88,12 +88,13 @@ class _BagDetailsState extends State<BagDetails> {
       ),
       body: Stack(
         children: [
-          Column(
+          ListView(
             children: [
-              Positioned(
-                child: Container(
+              // Positioned(
+                // child:
+                Container(
                   width: lebar,
-                  height: 250,
+                  height: 200,
                   alignment: AlignmentDirectional.center,
                   decoration: ShapeDecoration(
                     image: DecorationImage(
@@ -107,7 +108,7 @@ class _BagDetailsState extends State<BagDetails> {
                         // borderRadius: BorderRadius.circular(10),
                         ),
                   ),
-                ),
+                // ),
               ),
             ],
           ),
@@ -115,7 +116,7 @@ class _BagDetailsState extends State<BagDetails> {
             top: 180,
             child: Container(
               width: lebar,
-              height: tinggi - 310,
+              height: tinggi - 350,
               decoration: ShapeDecoration(
                 color: Provider.of<ThemeModeData>(context).containerColor,
                 // color: Color.fromRGBO(76, 83, 114, 1),

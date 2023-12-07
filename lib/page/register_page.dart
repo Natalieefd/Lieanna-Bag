@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
@@ -234,13 +235,20 @@ class _RegisterPageState extends State<RegisterPage> {
                           .headlineSmall
                           ?.copyWith(color: Colors.black),
                       errorText: emailVal == true && emailCheck == false
-                          ? "invalid email"
+                          ? "Invalid email"
                           : null,
                       errorStyle: TextStyle(
                         color: Theme.of(context).colorScheme.error,
                         fontSize: 14,
                       ),
                     ),
+                    
+                          onChanged: (value) {
+                            setState(() {
+                              emailCheck = EmailValidator.validate(
+                                  _emailController.text);
+                            });
+                          }
                   ),
                 ),
               ),
