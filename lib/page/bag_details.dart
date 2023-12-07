@@ -190,7 +190,7 @@ class _BagDetailsState extends State<BagDetails> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.only(top: 20, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
