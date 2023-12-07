@@ -99,7 +99,7 @@ class Profile extends StatelessWidget {
                   );
                 }
               },
-              selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
+              selectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               items: [
                 BottomNavigationBarItem(
@@ -207,8 +207,8 @@ class Profile extends StatelessWidget {
                               padding: const EdgeInsets.all(0),
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: NetworkImage(
-                                          profileData.toString()),
+                                      image:
+                                          NetworkImage(profileData.toString()),
                                       fit: BoxFit.cover)),
                               child: Container(
                                 width: lebar,
@@ -282,7 +282,8 @@ class Profile extends StatelessWidget {
                               icon: Icon(
                                 Icons.manage_accounts_rounded,
                                 size: 30,
-                                color: Color(0xFF4C5372),
+                                color: Provider.of<ThemeModeData>(context)
+                                    .containerColor,
                               ),
                               label: Text(
                                 "Edit Profile",
@@ -301,7 +302,8 @@ class Profile extends StatelessWidget {
                               icon: Icon(
                                 Icons.favorite_border_rounded,
                                 size: 30,
-                                color: Color(0xFF4C5372),
+                                color: Provider.of<ThemeModeData>(context)
+                                    .containerColor,
                               ),
                               label: Text(
                                 "My Favorite",
@@ -321,7 +323,8 @@ class Profile extends StatelessWidget {
                               icon: Icon(
                                 Icons.settings,
                                 size: 30,
-                                color: Color(0xFF4C5372),
+                                color: Provider.of<ThemeModeData>(context)
+                                    .containerColor,
                               ),
                               label: Text(
                                 "Settings",
@@ -340,7 +343,8 @@ class Profile extends StatelessWidget {
                               icon: Icon(
                                 Icons.info_outline_rounded,
                                 size: 30,
-                                color: Color(0xFF4C5372),
+                                color: Provider.of<ThemeModeData>(context)
+                                    .containerColor,
                               ),
                               label: Text(
                                 "About Us",

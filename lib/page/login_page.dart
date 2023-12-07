@@ -313,7 +313,7 @@ class _LoginPageState extends State<LoginPage> {
                         alert(context, 'Warning', e.toString());
                       }
                     } else {
-                      alert(context, "Waring",
+                      alert(context, "Warning",
                           "Mohon lengkapi data login terlebih dahulu!");
                     }
                   },
