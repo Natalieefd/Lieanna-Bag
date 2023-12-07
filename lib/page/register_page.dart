@@ -376,7 +376,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
 
                         } catch (e) {
-                          print(e);
+                          alert(context, 'Warning', e.toString());
                         }
                       } else if (checkVal == false) {
                         alert(context, "Waring",

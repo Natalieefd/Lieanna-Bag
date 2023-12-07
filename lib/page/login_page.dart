@@ -289,7 +289,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       } catch (e) {
-                        print(e);
+                          alert(context, 'Warning', e.toString());
                       }
                     } else {
                       alert(context, "Waring",

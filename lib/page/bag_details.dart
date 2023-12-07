@@ -15,14 +15,16 @@ class BagDetails extends StatefulWidget {
 
 class _BagDetailsState extends State<BagDetails> {
   String selectedColor = 'Grey';
-  bool isFavorite = false;
+  // String? selectedColor;
 
+  bool isFavorite = false;
   Map<String, String> colorMap = {
     'Grey': 'Assets/grey_kierra.jpg',
-    'Navy': 'Assets/navy_kierra.jpg',
-    'Khaki': 'Assets/khaki_kierra.jpg',
-    'Maroon': 'Assets/maroon_kierra.jpg',
+    // 'Navy': 'Assets/navy_kierra.jpg',
+    // 'Khaki': 'Assets/khaki_kierra.jpg',
+    // 'Maroon': 'Assets/maroon_kierra.jpg',
   };
+  // List<QueryDocumentSnapshot<Map<String, String>>> colorItem = [];
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _BagDetailsState extends State<BagDetails> {
   }
 
   String itemImage = '';
+  String itemWarna = '';
   String itemName = '';
   String itemDescription = '';
   int itemPrice = 0;
@@ -50,33 +53,44 @@ class _BagDetailsState extends State<BagDetails> {
 
     setState(() {
       itemImage = desainDocument['gambar'];
+      itemWarna = desainDocument['warna'];
       itemName = document['nama'];
       itemDescription = document['deskripsi'];
       itemPrice = document['harga'];
       itemType = document['jenis'];
+
+      colorMap.addAll({itemWarna:itemImage});
     });
   }
 
-  Future<void> addFavorite(String idTas) async {
+  Future<void> addFavorite(String idTas, String nama, String gambar) async{
     var userID = FirebaseAuth.instance.currentUser!.uid;
     var userCollection = await FirebaseFirestore.instance.collection('user');
 
-    userCollection
-        .doc(userID)
-        .collection('favorite')
-        .doc()
-        .set({'id tas': idTas});
+    userCollection.doc(userID).collection('favorite').doc(idTas).set({
+      'id tas' : idTas,
+      'gambar' : gambar,
+      'nama' : nama
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var lebar = MediaQuery.of(context).size.width;
     var tinggi = MediaQuery.of(context).size.height;
+
+    // List<QueryDocumentSnapshot<Map<String, dynamic>>> Color =
+    //     colorItem.where((bag) {
+    //   final name = bag['nama'].toString().toLowerCase();
+    //   return name.contains(searchTas.toLowerCase());
+    // }
+    // ).toList();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
         title: Text(
-          widget.itemId,
+          "BAG DETAIL",
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
@@ -102,7 +116,7 @@ class _BagDetailsState extends State<BagDetails> {
                     alignment: AlignmentDirectional.center,
                     decoration: ShapeDecoration(
                       image: DecorationImage(
-                        image: AssetImage(colorMap[selectedColor]!),
+                        image: NetworkImage(colorMap[selectedColor]!),
                         fit: BoxFit.contain,
                       ),
                       color: Colors.white,
@@ -196,7 +210,7 @@ class _BagDetailsState extends State<BagDetails> {
                         ),
                         IconButton(
                           onPressed: () {
-                            addFavorite(widget.itemId);
+                            addFavorite(widget.itemId, itemName, itemImage);
                           },
                           icon: const Icon(
                             Icons.favorite_sharp,

@@ -133,33 +133,37 @@ class Profile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: lebar,
-                        height: 350,
-                        padding: const EdgeInsets.all(0),
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("Assets/profile_default.png"),
-                                fit: BoxFit.cover)),
-                        child: Container(
-                          width: lebar,
-                          height: tinggi,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment(0.00, -1.00),
-                              end: Alignment(0, 1),
-                              colors: [Color(0x7F373538), Color(0xFF363538)],
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              profileData.toString() == ''
-                                  ? Container(
+                      profileData.toString() == ''
+                          ? Container(
+                              width: lebar,
+                              height: 350,
+                              padding: const EdgeInsets.all(0),
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "Assets/profile_default.png"),
+                                      fit: BoxFit.cover)),
+                              child: Container(
+                                width: lebar,
+                                height: tinggi,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment(0.00, -1.00),
+                                    end: Alignment(0, 1),
+                                    colors: [
+                                      Color(0x7F373538),
+                                      Color(0xFF363538)
+                                    ],
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
                                       width: 100,
                                       height: 100,
                                       decoration: ShapeDecoration(
@@ -173,8 +177,61 @@ class Profile extends StatelessWidget {
                                               BorderRadius.circular(60),
                                         ),
                                       ),
-                                    )
-                                  : Container(
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      usernameData.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      emailData.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Container(
+                              width: lebar,
+                              height: 350,
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          profileData.toString()),
+                                      fit: BoxFit.cover)),
+                              child: Container(
+                                width: lebar,
+                                height: tinggi,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment(0.00, -1.00),
+                                    end: Alignment(0, 1),
+                                    colors: [
+                                      Color(0x7F373538),
+                                      Color(0xFF363538)
+                                    ],
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
                                       width: 100,
                                       height: 100,
                                       decoration: BoxDecoration(
@@ -185,28 +242,30 @@ class Profile extends StatelessWidget {
                                                   profileData.toString()),
                                               fit: BoxFit.cover)),
                                     ),
-                              SizedBox(
-                                height: 10,
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      usernameData.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      emailData.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text(
-                                usernameData.toString(),
-                                textAlign: TextAlign.center,
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium,
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                emailData.toString(),
-                                textAlign: TextAlign.center,
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
