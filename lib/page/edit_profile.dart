@@ -83,7 +83,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
 
     final snackBarUpdate = SnackBar(
       content: const Text("Successfully edit profile"),
@@ -206,25 +206,25 @@ class _EditProfileState extends State<EditProfile> {
                       child: TextFormField(
                         controller: _usernameController,
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey.shade100,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.grey.shade200, width: 0),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Provider.of<ThemeModeData>(context)
-                                    .containerColor,
-                                width: 1.7),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          hintText: "Username",
-                          hintStyle: Theme.of(context).textTheme.bodySmall
-                          
-                        ),
+                            filled: true,
+                            fillColor: Colors.grey.shade100,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey.shade200, width: 0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
+                                  width: 1.7),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            contentPadding: const EdgeInsets.only(left: 10),
+                            hintText: "Username",
+                            hintStyle: Theme.of(context).textTheme.bodySmall),
                       ),
                     ),
                   ),

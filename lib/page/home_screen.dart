@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/bag_details.dart';
 import 'package:lienna_bag/page/login_page.dart';
-import 'package:lienna_bag/page/merk_page.dart';
 import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +17,6 @@ class hom_scrn extends StatefulWidget {
 }
 
 class _hom_scrnState extends State<hom_scrn> {
-  
   List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
 
   @override
@@ -44,7 +42,6 @@ class _hom_scrnState extends State<hom_scrn> {
 
   @override
   Widget build(BuildContext context) {
-    
     // List<QueryDocumentSnapshot<Map<String, dynamic>>> filteredBags =
     //     _allResults.where((bag) {
     //   final name = bag['nama'].toString().toLowerCase();
@@ -112,8 +109,8 @@ class _hom_scrnState extends State<hom_scrn> {
                       ),
                     ),
               title: Text('Welcome, $usernameData',
-                      style: Theme.of(context).textTheme.headlineMedium),
-                  actions: [
+                  style: Theme.of(context).textTheme.headlineMedium),
+              actions: [
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -128,8 +125,8 @@ class _hom_scrnState extends State<hom_scrn> {
                     size: 30,
                   ),
                 ),
-                  ],
-              ),
+              ],
+            ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor:
                   Provider.of<ThemeModeData>(context).containerColor,
@@ -166,7 +163,7 @@ class _hom_scrnState extends State<hom_scrn> {
                   );
                 }
               },
-              selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
+              selectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
               items: [
                 BottomNavigationBarItem(
@@ -195,7 +192,6 @@ class _hom_scrnState extends State<hom_scrn> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 200,
@@ -204,12 +200,11 @@ class _hom_scrnState extends State<hom_scrn> {
                               image: AssetImage("Assets/poster.jpg"),
                               fit: BoxFit.cover)),
                     ),
-
                     Container(
                       child: Row(
                         children: [
                           GestureDetector(
-                              onTap: () {
+                            onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => SearchPage(),
                               ));
@@ -330,7 +325,8 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BagDetails(itemId: '05CaEhyu4eU1TsZN64kd'),
+                              builder: (context) =>
+                                  BagDetails(itemId: '05CaEhyu4eU1TsZN64kd'),
                             ));
                           },
                           child: Padding(
@@ -352,7 +348,8 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BagDetails(itemId: 'sirZ0o7DADeQ7jm76Xfl'),
+                              builder: (context) =>
+                                  BagDetails(itemId: 'sirZ0o7DADeQ7jm76Xfl'),
                             ));
                           },
                           child: Padding(
@@ -400,7 +397,8 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BagDetails(itemId: 'hOGYjSU7T50WS11q87lP'),
+                              builder: (context) =>
+                                  BagDetails(itemId: 'hOGYjSU7T50WS11q87lP'),
                             ));
                           },
                           child: Padding(
@@ -422,7 +420,8 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BagDetails(itemId: 'LwiRXSAe3cL7yrCbfN0p'),
+                              builder: (context) =>
+                                  BagDetails(itemId: 'LwiRXSAe3cL7yrCbfN0p'),
                             ));
                           },
                           child: Padding(
