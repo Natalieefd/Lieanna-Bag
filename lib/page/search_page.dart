@@ -80,6 +80,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Provider.of<ThemeModeData>(context).containerColor,
+        automaticallyImplyLeading: false,
         title: Text(
           'SEARCH',
           textAlign: TextAlign.center,
@@ -99,7 +100,7 @@ class _SearchPageState extends State<SearchPage> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return hom_scrn();
+                  return const HomePage();
                 },
               ),
             );
@@ -109,7 +110,7 @@ class _SearchPageState extends State<SearchPage> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return SearchPage();
+                  return const SearchPage();
                 },
               ),
             );
@@ -119,15 +120,15 @@ class _SearchPageState extends State<SearchPage> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return Profile();
+                  return const Profile();
                 },
               ),
             );
           }
         },
-        selectedItemColor: Color.fromRGBO(32, 34, 47, 1),
+       selectedItemColor:  Color.fromRGBO(32, 34, 47, 1),
         unselectedItemColor: Color.fromRGBO(32, 34, 47, 1),
-        items: [
+        items: const [
           BottomNavigationBarItem(
             label: "Home",
             icon: Icon(

@@ -44,7 +44,6 @@ class _FavoritePageState extends State<FavoritePage> {
 
   void getFavorite() async {
     var userID = FirebaseAuth.instance.currentUser!.uid;
-    // var favID = await FirebaseFirestore.instance.collectionGroup('favorite').get();
     var favID = await FirebaseFirestore.instance
         .collection('user')
         .doc(userID)
@@ -55,13 +54,6 @@ class _FavoritePageState extends State<FavoritePage> {
       favoriteID = favID.docs;
     });
   }
-
-  // void deleteFavorite(String itemID) async {
-  //   var userID = FirebaseAuth.instance.currentUser!.uid;
-  //   var favCollection = await FirebaseFirestore.instance.collection('user').doc(userID).collection('favorite');
-
-  //   return favCollection.where('id tas', isEqualTo: itemID).;
-  // }
 
   Future<dynamic> alert(BuildContext context, String judul, String kontent) {
     return showDialog(
@@ -101,45 +93,38 @@ class _FavoritePageState extends State<FavoritePage> {
         centerTitle: true,
       ),
       body: favoriteID.length > 1
-          ? GestureDetector(
-              onLongPress: () {
-                alert(context, "Confirmation",
-                    "Are you sure want to delete this item from your favorite?");
-                // deleteFavorite();
-              },
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-                  crossAxisSpacing: 20.0,
-                  mainAxisSpacing: 20.0,
-                ),
-                itemCount: favoriteID.length,
-                padding: const EdgeInsets.all(20),
-                itemBuilder: (context, index) {
-                  final item = favoriteID[index];
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                        width: 111,
-                        height: 124,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFD9D9D9),
-                          image: DecorationImage(
-                              image: NetworkImage(item['gambar']),
-                              repeat: ImageRepeat.repeat),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+          ? GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+              crossAxisSpacing: 20.0,
+              mainAxisSpacing: 20.0,
+            ),
+            itemCount: favoriteID.length,
+            padding: const EdgeInsets.all(20),
+            itemBuilder: (context, index) {
+              final item = favoriteID[index];
+              return Column(
+                children: <Widget>[
+                  Container(
+                    width: 111,
+                    height: 124,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFD9D9D9),
+                      image: DecorationImage(
+                          image: NetworkImage(item['gambar']),
+                          repeat: ImageRepeat.repeat),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      Expanded(
-                          child: Text(
-                              getFirstSentence(item['nama'].toUpperCase())))
-                    ],
-                  );
-                },
-              ),
-            )
+                    ),
+                  ),
+                  Expanded(
+                      child: Text(
+                          getFirstSentence(item['nama'].toUpperCase())))
+                ],
+              );
+            },
+          )
           : Center(
               child: Text("There is no favorite item there",
                   style: Theme.of(context).textTheme.headlineSmall),

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/firebase_exception.dart';
-import 'package:lienna_bag/page/home_screen.dart';
+import 'package:lienna_bag/page/login_page.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -173,7 +173,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const hom_scrn(),
+                      builder: (context) => const LoginPage(),
                     ),
                   );
                 } else {

@@ -10,49 +10,21 @@ import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:provider/provider.dart';
 
-class hom_scrn extends StatefulWidget {
-  const hom_scrn({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<hom_scrn> createState() => _hom_scrnState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _hom_scrnState extends State<hom_scrn> {
-  List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
-
-  @override
-  void initState() {
-    _initData();
-    super.initState();
-  }
-
-  Future<void> getClientStream() async {
-    var data = await FirebaseFirestore.instance
-        .collection('tas')
-        .orderBy('nama')
-        .get();
-
-    setState(() {
-      _allResults = data.docs;
-    });
-  }
-
-  void _initData() async {
-    await getClientStream();
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // List<QueryDocumentSnapshot<Map<String, dynamic>>> filteredBags =
-    //     _allResults.where((bag) {
-    //   final name = bag['nama'].toString().toLowerCase();
-    //   // return name.contains(searchTas.toLowerCase());
-    // }).toList();
-
     var userCollection = FirebaseFirestore.instance.collection('user');
     var userID = FirebaseAuth.instance.currentUser!.uid;
 
     final orientation = MediaQuery.of(context).orientation;
+
     return StreamBuilder<DocumentSnapshot>(
       stream: userCollection.doc(userID).snapshots(),
       builder:
@@ -119,6 +91,7 @@ class _hom_scrnState extends State<hom_scrn> {
               actions: [
                 GestureDetector(
                   onTap: () {
+                    FirebaseAuth.instance.signOut();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -146,7 +119,7 @@ class _hom_scrnState extends State<hom_scrn> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return hom_scrn();
+                        return HomePage();
                       },
                     ),
                   );

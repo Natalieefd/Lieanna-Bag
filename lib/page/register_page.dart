@@ -341,7 +341,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: CheckboxListTile(
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text(
-                    "i have read and agree to the privacy policy",
+                    "I have read and agree to the privacy policy",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,

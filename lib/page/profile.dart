@@ -56,6 +56,7 @@ class Profile extends StatelessWidget {
             appBar: AppBar(
               backgroundColor:
                   Provider.of<ThemeModeData>(context).containerColor,
+              automaticallyImplyLeading: false,
               title: Text(
                 'PROFILE',
                 textAlign: TextAlign.center,
@@ -76,7 +77,7 @@ class Profile extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return hom_scrn();
+                        return HomePage();
                       },
                     ),
                   );
