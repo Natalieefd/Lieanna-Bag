@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class MerkPage extends StatefulWidget {
   final String merkName;
-  const MerkPage( {super.key, required this.merkName});
+  const MerkPage({super.key, required this.merkName});
 
   @override
   State<MerkPage> createState() => _MerkPageState();
@@ -58,18 +58,16 @@ class _MerkPageState extends State<MerkPage> {
             Navigator.pop(context);
           },
         ),
-        title: Text(
-          widget.merkName,
-          // 'MERK A',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineLarge
-        ),
+        title: Text(widget.merkName,
+            // 'MERK A',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineLarge),
         centerTitle: true,
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(119, 133, 99, 99),
-        ),
+        // decoration: const BoxDecoration(
+        //   color: Color.fromARGB(119, 133, 99, 99),
+        // ),
         child: Stack(children: <Widget>[
           Positioned(
             width: MediaQuery.of(context).size.width,
@@ -114,9 +112,8 @@ class _MerkPageState extends State<MerkPage> {
                   ),
                   Expanded(
                       child: Text(
-                    getFirstSentence(item[index]['nama'].toUpperCase()),
-                    style: const TextStyle(color: Colors.white70),
-                  ))
+                          getFirstSentence(item[index]['nama'].toUpperCase()),
+                          style: Theme.of(context).textTheme.headlineMedium))
                 ],
               );
             },

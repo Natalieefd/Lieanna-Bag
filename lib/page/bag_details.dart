@@ -15,12 +15,12 @@ class BagDetails extends StatefulWidget {
 }
 
 class _BagDetailsState extends State<BagDetails> {
-  String selectedColor = 'Grey';
+  String selectedColor = 'Hitam';
   // String? selectedColor;
 
   bool isFavorite = false;
   Map<String, String> colorMap = {
-    'Grey': 'Assets/grey_kierra.jpg',
+    'Hitam': 'Assets/grey_kierra.jpg',
     // 'Navy': 'Assets/navy_kierra.jpg',
     // 'Khaki': 'Assets/khaki_kierra.jpg',
     // 'Maroon': 'Assets/maroon_kierra.jpg',
@@ -115,7 +115,7 @@ class _BagDetailsState extends State<BagDetails> {
                   // },
                   child: Container(
                     width: lebar,
-                    height: 250,
+                    height: 220,
                     alignment: AlignmentDirectional.center,
                     decoration: ShapeDecoration(
                       image: DecorationImage(
@@ -123,7 +123,7 @@ class _BagDetailsState extends State<BagDetails> {
                         fit: BoxFit.contain,
                       ),
                       color: Colors.white,
-                      shape: const RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                           // borderRadius: BorderRadius.circular(10),
                           ),
                     ),
@@ -153,21 +153,20 @@ class _BagDetailsState extends State<BagDetails> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      itemName,
-                      // 'HEYLOOK BACKPACK KIERRA',
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(itemDescription,
-                        // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
+                    Text(itemName,
+                        // 'HEYLOOK BACKPACK KIERRA',
                         textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.headlineSmall),
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    const SizedBox(height: 10),
+                    Text(
+                      itemDescription,
+                      // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(color: Colors.black),
+                    ),
                     const SizedBox(height: 10),
                   ],
                 ),
@@ -261,8 +260,13 @@ class _BagDetailsState extends State<BagDetails> {
                         child: CupertinoButton(
                           color: Provider.of<ThemeModeData>(context)
                               .containerColor,
-                          child: Text("Tambahkan ke Favorite",
-                              style: Theme.of(context).textTheme.headlineSmall),
+                          child: Text(
+                            "Tambahkan ke Favorite",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.black),
+                          ),
                           onPressed: () {
                             addFavorite(widget.itemId, itemName, itemImage);
                           },
