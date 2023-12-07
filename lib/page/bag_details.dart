@@ -15,17 +15,9 @@ class BagDetails extends StatefulWidget {
 }
 
 class _BagDetailsState extends State<BagDetails> {
-  String selectedColor = 'Hitam';
-  // String? selectedColor;
-
+  String selectedColor = '';
   bool isFavorite = false;
-  Map<String, String> colorMap = {
-    'Hitam': 'Assets/grey_kierra.jpg',
-    // 'Navy': 'Assets/navy_kierra.jpg',
-    // 'Khaki': 'Assets/khaki_kierra.jpg',
-    // 'Maroon': 'Assets/maroon_kierra.jpg',
-  };
-  // List<QueryDocumentSnapshot<Map<String, String>>> colorItem = [];
+  Map<String, String> colorMap = {};
 
   @override
   void initState() {
@@ -50,23 +42,23 @@ class _BagDetailsState extends State<BagDetails> {
         .collection('desain')
         .get();
 
-    var desainDocument = desain.docs[0];
-
+    var desainDocument = desain.docs;
+    
     setState(() {
-      itemImage = desainDocument['gambar'];
-      itemWarna = desainDocument['warna'];
       itemName = document['nama'];
       itemDescription = document['deskripsi'];
       itemPrice = document['harga'];
       itemType = document['jenis'];
 
-      colorMap.addAll({itemWarna: itemImage});
+      for(final i in desainDocument) {
+        colorMap[i.get('warna')] = i.get('gambar');
+      }
     });
   }
 
   Future<void> addFavorite(String idTas, String nama, String gambar) async {
     var userID = FirebaseAuth.instance.currentUser!.uid;
-    var userCollection = await FirebaseFirestore.instance.collection('user');
+    var userCollection = FirebaseFirestore.instance.collection('user');
 
     userCollection
         .doc(userID)
@@ -99,29 +91,21 @@ class _BagDetailsState extends State<BagDetails> {
           Column(
             children: [
               Positioned(
-                child: GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => Merk_Page(),
-                  //     ),
-                  //   );
-                  // },
-                  child: Container(
-                    width: lebar,
-                    height: 220,
-                    alignment: AlignmentDirectional.center,
-                    decoration: ShapeDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(colorMap[selectedColor]!),
-                        fit: BoxFit.contain,
-                      ),
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          // borderRadius: BorderRadius.circular(10),
-                          ),
+                child: Container(
+                  width: lebar,
+                  height: 250,
+                  alignment: AlignmentDirectional.center,
+                  decoration: ShapeDecoration(
+                    image: DecorationImage(
+                      image:
+                        NetworkImage(colorMap[selectedColor]?? "https://firebasestorage.googleapis.com/v0/b/lieanna-bag.appspot.com/o/images%2Fproducts%2FSELECT_COLOR_Light.png?alt=media&token=9545fee5-6745-43e1-b74b-0589e945ef44")
+                        ,
+                      fit: BoxFit.contain,
                     ),
+                    color: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                        // borderRadius: BorderRadius.circular(10),
+                        ),
                   ),
                 ),
               ),
@@ -135,7 +119,7 @@ class _BagDetailsState extends State<BagDetails> {
               decoration: ShapeDecoration(
                 color: Provider.of<ThemeModeData>(context).containerColor,
                 // color: Color.fromRGBO(76, 83, 114, 1),
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -148,20 +132,21 @@ class _BagDetailsState extends State<BagDetails> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(itemName,
-                        // 'HEYLOOK BACKPACK KIERRA',
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.headlineMedium),
-                    const SizedBox(height: 10),
                     Text(
-                      itemDescription,
-                      // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
+                      itemName,
+                      // 'HEYLOOK BACKPACK KIERRA',
                       textAlign: TextAlign.justify,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(color: Colors.black),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    const SizedBox(height: 10),
+                    Text(itemDescription,
+                        // 'Backpack dengan design casual dapat memuat banyak barang karena dilengkapi kompartemen luas sehingga dapat menampung laptop 14-15 inch, slot saku bagian depan, serta saku kiri kanan.',
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: 10),
                   ],
                 ),
@@ -176,7 +161,7 @@ class _BagDetailsState extends State<BagDetails> {
               decoration: ShapeDecoration(
                 color: Provider.of<ThemeModeData>(context).container2Color,
                 // color: Color.fromRGBO(148, 154, 177, 1),
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -184,14 +169,14 @@ class _BagDetailsState extends State<BagDetails> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
-                        const Text(
+                        Text(
                           'Warna',
                           style: TextStyle(
                             color: Colors.black,
@@ -211,7 +196,7 @@ class _BagDetailsState extends State<BagDetails> {
                       },
                     ),
                     const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       'Harga',
                       style: TextStyle(
                         color: Colors.black,
@@ -255,13 +240,8 @@ class _BagDetailsState extends State<BagDetails> {
                         child: CupertinoButton(
                           color: Provider.of<ThemeModeData>(context)
                               .containerColor,
-                          child: Text(
-                            "Tambahkan ke Favorite",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(color: Colors.black),
-                          ),
+                          child: Text("Tambahkan ke Favorite",
+                              style: Theme.of(context).textTheme.headlineSmall),
                           onPressed: () {
                             addFavorite(widget.itemId, itemName, itemImage);
 
