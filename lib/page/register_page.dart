@@ -227,6 +227,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Email",
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(color: Colors.black),
                       errorText: emailVal == true && emailCheck == false
                           ? "invalid email"
                           : null,
@@ -275,6 +279,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       suffixIconColor: Colors.grey,
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Password",
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(color: Colors.black),
                     ),
                     obscureText: pressPass ? false : true,
                   ),
@@ -317,6 +325,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       suffixIconColor: Colors.grey,
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: "Confirm Password",
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(color: Colors.black),
                     ),
                     obscureText: pressConfPass ? false : true,
                   ),
