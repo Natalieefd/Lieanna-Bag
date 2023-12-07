@@ -20,6 +20,8 @@ class _EditProfileState extends State<EditProfile> {
   //variable untuk tampilkan animasi loading
   bool loading = false;
 
+  //untuk mengecek inputan empty
+  bool usernameVal = false;
   String imageUrl = "";
 
   final TextEditingController _usernameController = TextEditingController();
@@ -27,6 +29,22 @@ class _EditProfileState extends State<EditProfile> {
   var userCollection = FirebaseFirestore.instance.collection('user');
   var user = FirebaseAuth.instance.currentUser;
   var userID = FirebaseAuth.instance.currentUser!.uid;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController.addListener(() {
+      setState(() {
+        usernameVal = _usernameController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+  }
 
   Future<dynamic> alert(BuildContext context, String judul, String kontent) {
     return showDialog(
@@ -144,39 +162,35 @@ class _EditProfileState extends State<EditProfile> {
                               .putFile(File(imgPicker.path));
                           imageUrl =
                               await referenceImageToUpload.getDownloadURL();
-                        } catch (e) {
-                          alert(context, 'Warning', e.toString());
-                        }
+                        } catch (e) {}
                       },
                       child: imageUrl == ""
                           ? Padding(
-                            padding:
-                                const EdgeInsets.only(left: 125, right: 125),
-                            child: Container(
-                              height: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.circular(80),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    profileData.toString()))
+                              padding:
+                                  const EdgeInsets.only(left: 125, right: 125),
+                              child: Container(
+                                height: 140,
+                                decoration: BoxDecoration(
+                                    color: Colors.black26,
+                                    borderRadius: BorderRadius.circular(80),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            profileData.toString()))),
+                              ),
+                            )
+                          : Container(
+                              padding:
+                                  const EdgeInsets.only(left: 125, right: 125),
+                              child: Container(
+                                height: 140,
+                                decoration: BoxDecoration(
+                                  color: Colors.black26,
+                                  borderRadius: BorderRadius.circular(80),
+                                  image: DecorationImage(
+                                      image: NetworkImage(imageUrl)),
+                                ),
                               ),
                             ),
-                          )
-                          : Container(
-                            padding:
-                                const EdgeInsets.only(left: 125, right: 125),
-                            child: Container(
-                              height: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.circular(80),
-                              image: DecorationImage(
-                                image: NetworkImage(imageUrl)
-                            ),
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                   Text(
@@ -208,6 +222,8 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           contentPadding: const EdgeInsets.only(left: 10),
                           hintText: "Username",
+                          hintStyle: Theme.of(context).textTheme.bodySmall
+                          
                         ),
                       ),
                     ),
@@ -219,31 +235,32 @@ class _EditProfileState extends State<EditProfile> {
                       borderRadius: const BorderRadius.all(Radius.circular(40)),
                       child: const Text("Edit Profile"),
                       onPressed: () async {
-                        var username = _usernameController.value.text;
-              
+                        final username = _usernameController.value.text;
+
+                        if (usernameVal == true) {
                           try {
                             imageUrl == ''
-                            ? imageUrl = profileData.toString()
-                            : null;
+                                ? imageUrl =
+                                    "https://firebasestorage.googleapis.com/v0/b/lieanna-bag.appspot.com/o/images%2Fuser_profile%2Fprofile_default.png?alt=media&token=10db65e2-58a3-430a-b469-6a693f7ac8c7"
+                                : null;
 
-                            username == ''
-                          ? username = usernameData.toString()
-                          : null;
-                          
                             setState(() => loading = true);
-                            
+
                             //update data user pada firestore
                             updateUser(username, emailData.toString(),
-                            passwordData.toString(), imageUrl);
-              
+                                passwordData.toString(), imageUrl);
+
                             setState(() => loading = false);
-              
+
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBarUpdate);
-              
                           } catch (e) {
                             print(e);
                           }
+                        } else {
+                          alert(context, "Waring",
+                              "Mohon lengkapi data register terlebih dahulu!");
+                        }
                       },
                     ),
                   ),
