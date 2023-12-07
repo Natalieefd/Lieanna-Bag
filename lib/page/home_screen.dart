@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/page/bag_details.dart';
 import 'package:lienna_bag/page/login_page.dart';
+import 'package:lienna_bag/page/merk_page.dart';
 import 'package:lienna_bag/page/profile.dart';
 import 'package:lienna_bag/page/search_page.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +18,39 @@ class hom_scrn extends StatefulWidget {
 }
 
 class _hom_scrnState extends State<hom_scrn> {
+  
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> _allResults = [];
+
+  @override
+  void initState() {
+    _initData();
+    super.initState();
+  }
+
+  Future<void> getClientStream() async {
+    var data = await FirebaseFirestore.instance
+        .collection('tas')
+        .orderBy('nama')
+        .get();
+
+    setState(() {
+      _allResults = data.docs;
+    });
+  }
+
+  void _initData() async {
+    await getClientStream();
+  }
+
   @override
   Widget build(BuildContext context) {
+    
+    // List<QueryDocumentSnapshot<Map<String, dynamic>>> filteredBags =
+    //     _allResults.where((bag) {
+    //   final name = bag['nama'].toString().toLowerCase();
+    //   // return name.contains(searchTas.toLowerCase());
+    // }).toList();
+
     var userCollection = FirebaseFirestore.instance.collection('user');
     var userID = FirebaseAuth.instance.currentUser!.uid;
 
@@ -130,6 +162,7 @@ class _hom_scrnState extends State<hom_scrn> {
                 }
               },
               selectedItemColor: Color.fromRGBO(76, 83, 114, 1),
+              unselectedItemColor: Color.fromRGBO(10, 10, 11, 1),
               items: [
                 BottomNavigationBarItem(
                   label: "Home",
@@ -196,11 +229,11 @@ class _hom_scrnState extends State<hom_scrn> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SearchPage(),
-                              ));
-                            },
+                            // onTap: () {
+                            //   Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => MerkPage(merkName: "Kanken",),
+                            //   ));
+                            // },
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40, left: 30),
                               child: Hero(
@@ -292,7 +325,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => BagDetails(itemId: '05CaEhyu4eU1TsZN64kd'),
                             ));
                           },
                           child: Padding(
@@ -314,7 +347,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => BagDetails(itemId: 'sirZ0o7DADeQ7jm76Xfl'),
                             ));
                           },
                           child: Padding(
@@ -342,16 +375,16 @@ class _hom_scrnState extends State<hom_scrn> {
                               left: MediaQuery.of(context).size.width * 0.05,
                               top: 5),
                           child: Text(
-                            "Shoulder Bag 5632",
+                            "Kånken Weekender",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.18,
+                              left: MediaQuery.of(context).size.width * 0.25,
                               top: 5),
                           child: Text(
-                            "Sling Bag 1708",
+                            "Zalora",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
@@ -362,7 +395,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => BagDetails(itemId: 'hOGYjSU7T50WS11q87lP'),
                             ));
                           },
                           child: Padding(
@@ -384,7 +417,7 @@ class _hom_scrnState extends State<hom_scrn> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => BagDetails(itemId: 'LwiRXSAe3cL7yrCbfN0p'),
                             ));
                           },
                           child: Padding(
@@ -409,19 +442,19 @@ class _hom_scrnState extends State<hom_scrn> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.1,
+                              left: MediaQuery.of(context).size.width * 0.15,
                               top: 5),
                           child: Text(
-                            "Sling Bag 0638",
+                            "Hand Bag",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.22,
+                              left: MediaQuery.of(context).size.width * 0.32,
                               top: 5),
                           child: Text(
-                            "BackPack 0266",
+                            "Backpack",
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),

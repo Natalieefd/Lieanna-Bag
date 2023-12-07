@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MerkPage extends StatefulWidget {
   final String merkName;
-  const MerkPage({super.key, required this.merkName});
+  const MerkPage(String s, {super.key, required this.merkName});
 
   @override
   State<MerkPage> createState() => _MerkPageState();
