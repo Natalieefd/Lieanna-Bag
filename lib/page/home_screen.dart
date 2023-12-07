@@ -415,7 +415,7 @@ class _hom_scrnState extends State<hom_scrn> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                        image: AssetImage("Assets/tas3.jpg"),
+                                        image: AssetImage("Assets/Sadie_Mini_HandBag_Chalk.png"),
                                         fit: BoxFit.cover)),
                               ),
                             ),
