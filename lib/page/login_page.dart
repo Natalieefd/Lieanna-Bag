@@ -6,10 +6,12 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lienna_bag/Provider/themeMode.dart';
 import 'package:lienna_bag/auth.dart';
 import 'package:lienna_bag/page/forgot_password.dart';
 import 'package:lienna_bag/page/home_screen.dart';
 import 'package:lienna_bag/page/register_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -183,24 +185,33 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       child: TextFormField(
                           controller: _emailController,
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.grey.shade200,
+                            fillColor: Provider.of<ThemeModeData>(context)
+                                .container2Color,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey.shade200, width: 0),
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
+                                  width: 0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
                                   width: 1.7),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             contentPadding: const EdgeInsets.only(left: 10),
                             hintText: "Email",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.black),
                             errorText: emailVal == true && emailCheck == false
                                 ? "invalid email"
                                 : null,
@@ -227,36 +238,46 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       child: TextFormField(
                         controller: _passwordController,
+                        style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.grey.shade200, width: 0),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
-                                width: 1.7),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                press = !press;
-                              });
-                            },
-                            child: Icon(press
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined),
-                          ),
-                          suffixIconColor: Colors.grey,
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          hintText: "Password",
-                        ),
+                            filled: true,
+                            fillColor: Provider.of<ThemeModeData>(context)
+                                .container2Color,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
+                                  width: 0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Provider.of<ThemeModeData>(context)
+                                      .containerColor,
+                                  width: 1.7),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  press = !press;
+                                });
+                              },
+                              child: Icon(press
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined),
+                            ),
+                            suffixIconColor: Colors.grey,
+                            contentPadding: const EdgeInsets.only(left: 10),
+                            hintText: "Password",
+                            hintStyle: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.black)),
                         obscureText: press ? false : true,
-                        style: const TextStyle(),
+                        // style: const TextStyle(),
                       ),
                     ),
                   ],
@@ -289,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       } catch (e) {
-                          alert(context, 'Warning', e.toString());
+                        alert(context, 'Warning', e.toString());
                       }
                     } else {
                       alert(context, "Waring",
